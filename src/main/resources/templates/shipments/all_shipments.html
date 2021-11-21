@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<h6 class="m-0 font-weight-bold text-primary">List of all shipments</h6>
+	<table>
+		<thead>
+			<tr>
+				<th>Identifier</th>
+				<th>Sender</th>
+				<th>Recipient</th>
+				<th>Address</th>
+				<th>Weight</th>
+			</tr>
+		</thead>
+		<tbody>
+			<th:block th:each="shipment : ${shipmentViewModels}" th:object="${shipment}">
+				<tr>
+					<td th:text="*{id}"></td>
+					<td th:text="*{sender}"></td>
+					<td th:text="*{recipient}"></td>
+					<td th:text="*{address}"></td>
+					<td th:text="*{weight}"></td>
+				</tr>
+			</th:block>
+		</tbody>
+	</table>
+</body>
+</html>
