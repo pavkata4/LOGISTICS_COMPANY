@@ -1,9 +1,15 @@
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
 .container-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
     background: url("./images/transport-picture.jpg") no-repeat fixed center;
+    animation: fadeIn 1s ease;
 }
 
 .container {
@@ -40,26 +46,6 @@
     padding: 0 20px;
     text-align: center;
 }
-
-@media screen and (max-width: 1000px) {
-    .title {
-        font-size: 30px;
-    }
-    .company-name {
-        font-size: 34px;
-    }
-
-}
-
-@media screen and (max-width: 800px) {
-    .title {
-        font-size: 26px;
-    }
-    .company-name {
-        font-size: 30px;
-    }
-
-}
 /* Left panel */
 
 /* Right panel */
@@ -67,40 +53,44 @@
     width: 50%;
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    padding-top: 20px;
+    background: rgba(255, 255, 255 , 0.1);
 }
 
 .authentication-tabs {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 50px;
+    height: 55px;
     border-radius: 8px;
 }
 
 .tab {
-    width: calc(50% - 20px);
+    width: calc(50% - 85px);
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.5);
     color: white;
     cursor: pointer;
+    outline: 0;
+    transition: background-color 0.8s ease;
+    height: 45px;
 }
 
 .tab:hover {
-    background: rgb(26, 177, 136);
+    background: rgba(26, 177, 136, 0.5);
 }
 
 .tab.register {
-    border-right: 1px solid white;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .tab.login {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-right: 1px solid white;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
 
 .tab.active {
@@ -112,11 +102,16 @@
 }
 
 .authenticate-form {
+    display: none;
     height: 100%;
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    animation: fadeIn 0.8s ease;
+}
+
+.authenticate-form.active {
+    display: flex;
 }
 
 /* Input Form */
@@ -166,7 +161,7 @@
 }
 
 .authenticate-button {
-    height: 35px;
+    height: 45px;
     width: 150px;
     border-radius: 8px;
     border: none;
@@ -183,6 +178,7 @@
 .authenticate-link {
   text-decoration: underline;
   color: rgba(255, 255, 255, 0.5);
+  text-align: center;
 }
 /* Buttons */
 /* Right panel */
@@ -195,6 +191,41 @@ html {
 body {
     padding: 0;
     margin: 0;
+}
+
+@media screen and (max-width: 800px) {
+    .title {
+        font-size: 26px;
+    }
+    .company-name {
+        font-size: 30px;
+    }
+
+}
+
+
+@media screen and (max-width: 1000px) {
+    .container {
+        width: 80%;
+    }
+
+    .title {
+        font-size: 30px;
+    }
+    .company-name {
+        font-size: 34px;
+    }
+
+    .tab {
+        padding: 0 10px;
+        width: initial;
+        height: 35px;
+    }
+
+    .authenticate-button {
+        height: 35px;
+        width: 100px;
+    }
 }
 
 
