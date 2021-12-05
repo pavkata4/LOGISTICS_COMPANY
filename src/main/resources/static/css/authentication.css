@@ -8,7 +8,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    background: url("./images/transport-picture.jpg") no-repeat fixed center;
+    background: url("../images/transport-picture.jpg") no-repeat fixed center;
     animation: fadeIn 1s ease;
 }
 
@@ -30,12 +30,19 @@
     width: 50%;
 }
 
+.authenticate-header .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+}
+
 .title {
     color: white;
     font-size: 36px;
     flex-wrap: wrap;
     padding: 0 20px;
-    margin-bottom: 50px;
     text-align: center;
 }
 
@@ -45,6 +52,40 @@
     flex-wrap: wrap;
     padding: 0 20px;
     text-align: center;
+    margin-top: 50px;
+}
+
+.thumbnail-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: auto 0 60px;
+}
+
+.thumbnail-links a {
+    color: white;
+    font-size: 24px;
+    margin-right: 25px;
+}
+
+.thumbnail-links a:last-of-type {
+    margin-right: 0;
+}
+
+.thumbnail-links a .fa-instagram {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    border-radius: 13px;
+}
+
+.thumbnail-links a .fa-twitter {
+    color: #00aced
+}
+
+.thumbnail-links a .fa-facebook {
+    color: #4267B2;
+    background: white;
+    border-radius: 13px;
 }
 /* Left panel */
 
@@ -53,65 +94,25 @@
     width: 50%;
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
     background: rgba(255, 255, 255 , 0.1);
 }
 
-.authentication-tabs {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 55px;
-    border-radius: 8px;
-}
-
-.tab {
-    width: calc(50% - 85px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.5);
+.authentication-title {
     color: white;
-    cursor: pointer;
-    outline: 0;
-    transition: background-color 0.8s ease;
-    height: 45px;
-}
-
-.tab:hover {
-    background: rgba(26, 177, 136, 0.5);
-}
-
-.tab.register {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
-.tab.login {
-    border-right: 1px solid white;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-}
-
-.tab.active {
-    background: rgb(26, 177, 136);
-}
-
-.tab.active:hover {
-    background: rgba(26, 177, 136, 0.8);
+    font-size: 28px;
+    line-height: 48px;
+    margin-top: 60px;
+    padding: 0 20px;
+    text-align: center;
 }
 
 .authenticate-form {
-    display: none;
+    display: flex;
     height: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     animation: fadeIn 0.8s ease;
-}
-
-.authenticate-form.active {
-    display: flex;
 }
 
 /* Input Form */
@@ -157,7 +158,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
 }
 
 .authenticate-button {
@@ -182,16 +182,6 @@
 }
 /* Buttons */
 /* Right panel */
-
-body,
-html {
-    height: 100%;
-}
-
-body {
-    padding: 0;
-    margin: 0;
-}
 
 @media screen and (max-width: 800px) {
     .title {
@@ -228,5 +218,14 @@ body {
     }
 }
 
+body,
+html {
+    height: 100%;
+}
 
-[type="submit"] {transition: all .25s ease-in;}
+body {
+    padding: 0;
+    margin: 0;
+}
+
+
