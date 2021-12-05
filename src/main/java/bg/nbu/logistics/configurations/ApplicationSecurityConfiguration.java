@@ -3,8 +3,11 @@ package bg.nbu.logistics.configurations;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+
 
 @Configuration
 @EnableWebSecurity
@@ -17,7 +20,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
     private static final String PASSWORD = "password";
     private static final String USERNAME = "username";
     private static final String USERS_LOGOUT = "/users/logout";
-   
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception  {
         httpSecurity
@@ -45,5 +48,18 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                         .logoutUrl(USERS_LOGOUT)
                         .invalidateHttpSession(true)
                         .logoutSuccessUrl(INDEX);
+    }
+
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/**/*.js", "/**/*.css")
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/icon/**", "/scripts/**");
+    }
+
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 }

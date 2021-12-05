@@ -1,12 +1,64 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-
+		xmlns:th="http://www.thymeleaf.org" \>
+<head>
+	<title>Logistic company</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="University project for New Bulgarian University">
+	<meta name="keywords" content="university, project, new, bulgarian, university">
+	<meta name="author" content="Nikola, Georgi, Iskren, Kristina, Simeon">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="index.css">
+	<script type="text/javascript" src="../static/scripts/script.js">
+	</script>
+</head>
 
 <body>
-	<hr />
-	<strong>Welcome guest!</strong>
-	<p>Browse the logistics company :)</p>
-	<a th:href="@{/users/register}">Register for free &rarr;</a>
+<div class="container-wrapper">
+	<div class="container">
+		<div class="authenticate-header">
+			<div class="title">Welcome to Logistic Company</div>
+			<span class="company-name">SPD</span>
+		</div>
+
+		<div class="authenticate-container">
+			<div class="authentication-tabs">
+				<div class="tab register active">Register</div>
+				<div class="tab login">Login</div>
+			</div>
+<!--			<form class="authenticate-form register" action="#">-->
+<!--				<div class="username field">-->
+<!--					<div class="label">Username</div>-->
+<!--					<input class="input" type="text" name="username" id="username" placeholder="james.bond" required />-->
+<!--				</div>-->
+<!--				<div class="password field">-->
+<!--					<div class="label">Password</div>-->
+<!--					<input class="input" type="password" name="password" id="password" placeholder="********" required />-->
+<!--				</div>-->
+<!--				<div class="email field">-->
+<!--					<div class="label">Email</div>-->
+<!--					<input class="input" type="text" name="email" id="email" placeholder="james.bond@spectre.com" required />-->
+<!--				</div>-->
+<!--			</form>-->
+
+			<form class="authenticate-form login" action="#">
+				<div class="username field">
+					<div class="label">Username</div>
+					<input class="input" type="text" name="username" id="username" placeholder="james.bond" required />
+				</div>
+				<div class="password field">
+					<div class="label">Password</div>
+					<input class="input" type="password" name="password" id="password" placeholder="********" required />
+				</div>
+			</form>
+
+			<div class="authenticate-buttons">
+				<button class="authenticate-button" type="submit">Register</button>
+				<a class="authenticate-link" href="#">I am already registered</a>
+
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
