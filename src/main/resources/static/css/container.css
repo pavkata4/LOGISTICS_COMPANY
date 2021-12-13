@@ -16,7 +16,7 @@
     align-content: flex-end;
     transform: translateX(5%);
     height: auto;
-    border-radius: 25px;
+    /*border-radius: 25px;*/
     border: 1px solid black;
     color: black
 }
@@ -34,10 +34,10 @@
     background-color: #39395f;
     /*background-color: #a9c25d;*/
     width: 100%;
-    height: 5vmin;
+    height: 6vmin;
     justify-content: center;
     align-items: center;
-    border-radius: 25px;
+    /*border-radius: 25px;*/
     color: white;
 }
 
