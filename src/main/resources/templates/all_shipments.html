@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" \>
+<head>
+    <title>Logistic company</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="University project for New Bulgarian University">
+    <meta name="keywords" content="university, project, new, bulgarian, university">
+    <meta name="author" content="Nikola, Georgi, Iskren, Kristina, Simeon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/container.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <script src="scripts/scripts.js"></script>
+</head>
+<body>
+<div class="pageContent">
+    <th:block th:include="~{fragments/menu}"></th:block>
+    <header><h1>Logistic Company</h1></header>
+    <div class="container">
+        <div class="box-1">
+            <div class="box-headline"><h2>Всички поръчки</h2></div>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Изпратено от</th>
+                    <th>Получател</th>
+                    <th>Адрес</th>
+                    <th>Тежест</th>
+                </tr>
+                <tbody>
+                    <th:block th:each="shipment : ${shipmentViewModels}" th:object="${shipment}">
+                        <tr>
+                            <td th:text="*{id}"></td>
+                            <td th:text="*{sender}"></td>
+                            <td th:text="*{recipient}"></td>
+                            <td th:text="*{address}"></td>
+                            <td th:text="*{weight}"></td>
+                        </tr>
+                    </th:block>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <th:block th:include="~{fragments/footer}"></th:block>
+</div>
+</body>
+</html>

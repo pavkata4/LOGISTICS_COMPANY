@@ -1,52 +1,58 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"\>
+<html xmlns:th="http://www.thymeleaf.org" \>
 <head>
-	<title>Logistic company</title>
-	<meta charset="UTF-8">
-	<meta name="description" content="University project for New Bulgarian University">
-	<meta name="keywords" content="university, project, new, bulgarian, university">
-	<meta name="author" content="Nikola, Georgi, Iskren, Kristina, Simeon">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="/css/authentication.css">
-	<script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <title>Logistic company</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="University project for New Bulgarian University">
+    <meta name="keywords" content="university, project, new, bulgarian, university">
+    <meta name="author" content="Nikola, Georgi, Iskren, Kristina, Simeon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/container.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/tables.css">
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
 </head>
-
 <body>
-<div class="container-wrapper">
-	<div class="container">
-		<div class="authenticate-header">
-			<div class="header">
-				<div class="title">Welcome to Logistic Company</div>
-				<span class="company-name">SPD</span>
-			</div>
+<div class="pageContent">
+    <header><h1>Logistic Company</h1></header>
+    <div class="container">
+        <div class="box-1">
+            <div class="box-headline"><h2>Моите поръчки</h2></div>
+            <form class="authenticate-form login" th:action="@{/users/login}" th:method="post">
+                <div class="username field">
+                    <div class="label">Username</div>
+                    <input class="input" type="text" name="username" id="username" placeholder="Username" required/>
+                </div>
+                <div class="password field">
+                    <div class="label">Password</div>
+                    <input class="input" type="password" name="password" id="password" placeholder="Password" required/>
+                </div>
 
-			<div class="thumbnail-links">
-				<a href="https://github.com/iskrenpetrov/LogisticCompany" target="_blank"><i class="fab fa-github"></i></a>
-				<a href="http://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-				<a href="https://instagram.com" target="_blank"><fa class="fab fa-instagram"></fa></a>
-				<a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-			</div>
-		</div>
-
-		<div class="authenticate-container">
-			<div class="authentication-title">Login</div>
-			<form class="authenticate-form login" th:action="@{/users/login}" th:method="post">
-				<div class="username field">
-					<div class="label">Username</div>
-					<input class="input" type="text" name="username" id="username" placeholder="james.bond" required/>
-				</div>
-				<div class="password field">
-					<div class="label">Password</div>
-					<input class="input" type="password" name="password" id="password" placeholder="********" required/>
-				</div>
-
-				<div class="authenticate-buttons">
-					<button class="authenticate-button" type="submit">Login</button>
-					<a class="authenticate-link" th:href="@{/users/register}">Not signed in? Register</a>
-				</div>
-			</form>
-		</div>
-	</div>
+                <div class="authenticate-buttons">
+                    <button class="authenticate-button" type="submit">Login</button>
+                    <a class="authenticate-link" th:href="@{/users/register}">Not signed in? Register</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="box-footer">
+            <h2 class="head-text-footer">Logistic Company</h2>
+            <h3 class="footer-h3-size">LogisticCompany е проект за Нов Български Университет,
+                разработен със Spring.</h3>
+        </div>
+        <div class="box-footer">
+            <h2 class="head-text-footer">Logistic Company</h2>
+            <h3 class="footer-h3-size">LogisticCompany е проект за Нов Български Университет,
+                разработен със Spring.</h3>
+        </div>
+        <div class="box-footer">
+            <h2 class="head-text-footer">Logistic Company</h2>
+            <h3 class="footer-h3-size">LogisticCompany е проект за Нов Български Университет,
+                разработен със Spring.</h3>
+        </div>
+    </footer>
 </div>
 </body>
 </html>

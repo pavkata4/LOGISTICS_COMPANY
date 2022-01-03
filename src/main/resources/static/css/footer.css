@@ -8,10 +8,11 @@
     width: 100%;
     border-top: 1px solid white;
     margin-top: auto;
+    justify-content: center;
 }
 
 .box-footer{
-    flex-basis: 33%;
+    flex-basis: 31%;
     text-align: center;
     text-decoration: none;
 }

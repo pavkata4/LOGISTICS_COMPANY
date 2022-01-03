@@ -14,10 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController extends BaseController {
     public static final String INDEX_PATH = "/";
     public static final String HOME_PATH = "/home";
-    
+
     public static final String HOME = "home";
     public static final String INDEX = "index";
-    
+
     @GetMapping(INDEX_PATH)
     @PreAuthorize(IS_ANONYMOUS)
     public ModelAndView index() {
@@ -29,4 +29,5 @@ public class HomeController extends BaseController {
     public ModelAndView home() {
         return view(HOME);
     }
+
 }
