@@ -1,0 +1,133 @@
+body,
+html {
+    height: 100%;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.container-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    background: url("../images/transport-picture.jpg") no-repeat fixed center;
+    animation: fadeIn 1s ease;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    height: 40%;
+    width: 60%;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    flex-direction: column;
+}
+
+.authenticate-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 30%;
+}
+
+.title {
+    color: white;
+    font-size: 36px;
+    flex-wrap: wrap;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.company-name {
+    color: white;
+    font-size: 40px;
+    flex-wrap: wrap;
+    padding: 0 20px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.company-description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 20px;
+    overflow: scroll;
+
+    color: white;
+    font-size: 18px;
+}
+
+.company-description::-webkit-scrollbar {
+  display: none;
+}
+
+.index-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+}
+
+.thumbnail-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.thumbnail-links a {
+    color: white;
+    font-size: 24px;
+    margin-right: 25px;
+}
+
+.thumbnail-links a:last-of-type {
+    margin-right: 0;
+}
+
+.thumbnail-links a .fa-instagram {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    border-radius: 13px;
+}
+
+.thumbnail-links a .fa-twitter {
+    color: #00aced
+}
+
+.thumbnail-links a .fa-facebook {
+    color: #4267B2;
+    background: white;
+    border-radius: 13px;
+}
+
+.continue-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1ab188;
+    height: 30px;
+    width: 150px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    outline: 0;
+    text-decoration: 0;
+}
+
+.continue-btn:hover {
+    background: rgba(26, 177, 136, 0.7);
+}
+
+.continue-btn .fa-arrow-right {
+    margin-left: 40px;
+}

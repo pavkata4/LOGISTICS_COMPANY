@@ -3,8 +3,11 @@ package bg.nbu.logistics.configurations;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+
 
 @Configuration
 @EnableWebSecurity
@@ -13,11 +16,14 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
     private static final String INDEX = "/";
     private static final String USERS_REGISTER = "/users/register";
     private static final String USERS_LOGIN = "/users/login";
+    private static final String SHIPMENTS = "/all_shipments";
+    private static final String MY_SHIPMENTS = "/my_shipments";
+    private static final String ALL_USERS = "/all_users";
     private static final String HOME = "/home";
     private static final String PASSWORD = "password";
     private static final String USERNAME = "username";
     private static final String USERS_LOGOUT = "/users/logout";
-   
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception  {
         httpSecurity
@@ -30,6 +36,16 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .csrf()
                     .disable()
                     .authorizeRequests()
+//                .antMatchers(HOME)
+//                    .authenticated()
+//                .antMatchers(SHIPMENTS, ALL_USERS)
+//                    .hasAuthority("ROLE_EMPLOYEE")
+//                .antMatchers(MY_SHIPMENTS)
+//                    .hasAuthority("ROLE_USER")
+//                .antMatchers(INDEX, USERS_LOGIN, USERS_REGISTER)
+//                    .permitAll()
+                .antMatchers(HOME, SHIPMENTS, MY_SHIPMENTS)
+                    .authenticated()
                 .antMatchers(INDEX, USERS_LOGIN, USERS_REGISTER)
                     .anonymous()
                     .anyRequest()
@@ -45,5 +61,18 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                         .logoutUrl(USERS_LOGOUT)
                         .invalidateHttpSession(true)
                         .logoutSuccessUrl(INDEX);
+    }
+
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/**/*.js", "/**/*.css")
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/icon/**", "/scripts/**");
+    }
+
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 }

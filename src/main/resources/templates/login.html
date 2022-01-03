@@ -1,22 +1,58 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-
-
+<html xmlns:th="http://www.thymeleaf.org" \>
+<head>
+    <title>Logistic company</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="University project for New Bulgarian University">
+    <meta name="keywords" content="university, project, new, bulgarian, university">
+    <meta name="author" content="Nikola, Georgi, Iskren, Kristina, Simeon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/container.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/tables.css">
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+</head>
 <body>
-	<div>
-		<h1 class="h4 text-gray-900 mb-4">Login</h1>
-	</div>
-	<form class="user" th:action="@{/users/login}" th:method="post">
-		<input type="text" class="form-control form-control-user"
-			id="inputUsername" name="username" placeholder="Username"> <input
-			type="password" class="form-control form-control-user"
-			id="inputPassword" name="password" placeholder="Password">
-		<button type="submit">Login</button>
-	</form>
-	<h3>or</h3>
-	Haven`t signed-up yet?
-	<a th:href="@{/users/register}">Register!</a>
-</body>
+<div class="pageContent">
+    <header><h1>Logistic Company</h1></header>
+    <div class="container">
+        <div class="box-1">
+            <div class="box-headline"><h2>Моите поръчки</h2></div>
+            <form class="authenticate-form login" th:action="@{/users/login}" th:method="post">
+                <div class="username field">
+                    <div class="label">Username</div>
+                    <input class="input" type="text" name="username" id="username" placeholder="Username" required/>
+                </div>
+                <div class="password field">
+                    <div class="label">Password</div>
+                    <input class="input" type="password" name="password" id="password" placeholder="Password" required/>
+                </div>
 
+                <div class="authenticate-buttons">
+                    <button class="authenticate-button" type="submit">Login</button>
+                    <a class="authenticate-link" th:href="@{/users/register}">Not signed in? Register</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="box-footer">
+            <h2 class="head-text-footer">Logistic Company</h2>
+            <h3 class="footer-h3-size">LogisticCompany е проект за Нов Български Университет,
+                разработен със Spring.</h3>
+        </div>
+        <div class="box-footer">
+            <h2 class="head-text-footer">Logistic Company</h2>
+            <h3 class="footer-h3-size">LogisticCompany е проект за Нов Български Университет,
+                разработен със Spring.</h3>
+        </div>
+        <div class="box-footer">
+            <h2 class="head-text-footer">Logistic Company</h2>
+            <h3 class="footer-h3-size">LogisticCompany е проект за Нов Български Университет,
+                разработен със Spring.</h3>
+        </div>
+    </footer>
+</div>
+</body>
 </html>

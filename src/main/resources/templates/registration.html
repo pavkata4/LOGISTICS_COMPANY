@@ -1,24 +1,63 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" \>
+<head>
+    <title>Logistic company</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="University project for New Bulgarian University">
+    <meta name="keywords" content="university, project, new, bulgarian, university">
+    <meta name="author" content="Nikola, Georgi, Iskren, Kristina, Simeon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/container.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/tables.css">
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+</head>
 <body>
-	<form th:action="@{/users/register}" th:method="post"
-		th:object="${userRegisterBindingModel}" enctype="utf8">
-		<div>
-			<input type="text" id="inputUsername" placeholder="Username"
-				th:field="*{username}"> <small id="usernameError"
-				th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
-		</div>
-		<div>
-			<input type="password" id="inputPassword" placeholder="Password"
-				th:field="*{password}"> <small id="passwordError"
-				th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
-		</div>
-		<button type="submit">Register</button>
-	</form>
+<div class="pageContent">
+    <header><h1>Logistic Company</h1></header>
+    <div class="container">
+        <div class="box-1">
+            <div class="box-headline"><h2>Моите поръчки</h2></div>
+            <form class="authenticate-form register" th:action="@{/users/register}" th:method="post"
+                  th:object="${userRegisterBindingModel}">
+                <div class="username field">
+                    <div class="label">Username</div>
+                    <input class="input" type="text" name="username" placeholder="james.bond" required/>
+                </div>
+                <div class="password field">
+                    <div class="label">Password</div>
+                    <input class="input" type="password" name="password" placeholder="********" required/>
+                </div>
+                <div class="email field">
+                    <div class="label">Email</div>
+                    <input class="input" type="text" name="email" id="email" placeholder="james.bond@spectre.com"/>
+                </div>
 
-	<div>
-		Already having an account? <a th:href="@{/users/login}">Login!</a>
-	</div>
+                <div class="authenticate-buttons">
+                    <button class="authenticate-button" type="submit">Register</button>
+                    <a class="authenticate-link" th:href="@{/users/login}">I am already registered</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="box-footer">
+            <h2 class="head-text-footer">Logistic Company</h2>
+            <h3 class="footer-h3-size">LogisticCompany е проект за Нов Български Университет,
+                разработен със Spring.</h3>
+        </div>
+        <div class="box-footer">
+            <h2 class="head-text-footer">Logistic Company</h2>
+            <h3 class="footer-h3-size">LogisticCompany е проект за Нов Български Университет,
+                разработен със Spring.</h3>
+        </div>
+        <div class="box-footer">
+            <h2 class="head-text-footer">Logistic Company</h2>
+            <h3 class="footer-h3-size">LogisticCompany е проект за Нов Български Университет,
+                разработен със Spring.</h3>
+        </div>
+    </footer>
+</div>
 </body>
 </html>

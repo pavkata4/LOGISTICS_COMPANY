@@ -1,0 +1,41 @@
+.footer {
+    display:flex;
+    flex-wrap: wrap;
+    color: white;
+    background-color: #292929;
+    color: white;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid white;
+    margin-top: auto;
+    justify-content: center;
+}
+
+.box-footer{
+    flex-basis: 31%;
+    text-align: center;
+    text-decoration: none;
+}
+
+.head-text-footer {
+    color: rgb(243, 113, 46);
+}
+
+.footer-h3-size {
+    font-size: 18px;
+}
+
+.footer-h4-size {
+    font-size: 14px;
+}
+
+a {
+    color: white;
+}
+
+@media(max-width:468px) {
+    .footer {
+        flex-direction: column;
+        align-items: center;
+    }
+}

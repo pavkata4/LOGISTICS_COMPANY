@@ -1,0 +1,231 @@
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+.container-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: url("../images/transport-picture.jpg") no-repeat fixed center;
+    animation: fadeIn 1s ease;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    height: 40%;
+    width: 60%;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+/* Left panel */
+.authenticate-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.authenticate-header .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.title {
+    color: white;
+    font-size: 36px;
+    flex-wrap: wrap;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.company-name {
+    color: white;
+    font-size: 40px;
+    flex-wrap: wrap;
+    padding: 0 20px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.thumbnail-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: auto 0 60px;
+}
+
+.thumbnail-links a {
+    color: white;
+    font-size: 24px;
+    margin-right: 25px;
+}
+
+.thumbnail-links a:last-of-type {
+    margin-right: 0;
+}
+
+.thumbnail-links a .fa-instagram {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    border-radius: 13px;
+}
+
+.thumbnail-links a .fa-twitter {
+    color: #00aced
+}
+
+.thumbnail-links a .fa-facebook {
+    color: #4267B2;
+    background: white;
+    border-radius: 13px;
+}
+/* Left panel */
+
+/* Right panel */
+.authenticate-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255 , 0.1);
+}
+
+.authentication-title {
+    color: white;
+    font-size: 28px;
+    line-height: 48px;
+    margin-top: 60px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.authenticate-form {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    animation: fadeIn 0.8s ease;
+}
+
+/* Input Form */
+.field {
+    width: 100%;
+    height: 50px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.field::after {
+    content: '';
+    height: 1px;
+    width: 100%;
+    background: #a0b3b0;
+}
+
+.label {
+  text-transform: uppercase;
+  color: white;
+}
+
+.input {
+  background: none;
+  border: none;
+  width: calc(100% - 20px);
+  display: flex;
+  align-self: flex-end;
+  outline: 0;
+  caret-color: white;
+  color: white;
+}
+
+.input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+/* Input Form */
+
+/* Buttons */
+.authenticate-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.authenticate-button {
+    height: 45px;
+    width: 150px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 20px;
+    background: #1ab188;
+    color: white;
+    cursor: pointer;
+}
+
+.authenticate-button:hover {
+    background: rgba(26, 177, 136, 0.7);
+}
+
+.authenticate-link {
+  text-decoration: underline;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+/* Buttons */
+/* Right panel */
+
+@media screen and (max-width: 800px) {
+    .title {
+        font-size: 26px;
+    }
+    .company-name {
+        font-size: 30px;
+    }
+
+}
+
+
+@media screen and (max-width: 1000px) {
+    .container {
+        width: 80%;
+    }
+
+    .title {
+        font-size: 30px;
+    }
+    .company-name {
+        font-size: 34px;
+    }
+
+    .tab {
+        padding: 0 10px;
+        width: initial;
+        height: 35px;
+    }
+
+    .authenticate-button {
+        height: 35px;
+        width: 100px;
+    }
+}
+
+body,
+html {
+    height: 100%;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+
