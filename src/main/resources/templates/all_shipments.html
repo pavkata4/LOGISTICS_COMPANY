@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="css/container.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/tables.css">
-    <link rel="stylesheet" href="/css/buttons.css">
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
     <script src="scripts/scripts.js"></script>
 </head>
@@ -30,7 +29,6 @@
                     <th>Получател</th>
                     <th>Адрес</th>
                     <th>Тежест</th>
-                    <th>Операции</th>
                 </tr>
                 <tbody>
                     <th:block th:each="shipment : ${shipmentViewModels}" th:object="${shipment}">
@@ -40,10 +38,6 @@
                             <td th:text="*{recipient}"></td>
                             <td th:text="*{address}"></td>
                             <td th:text="*{weight}"></td>
-                            <td>
-                                <button class="roundButton editButton">Edit</button>
-                                <button class="roundButton deleteButton">Delete</button>
-                            </td>
                         </tr>
                     </th:block>
                 </tbody>

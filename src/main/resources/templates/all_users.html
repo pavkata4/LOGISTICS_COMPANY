@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="css/container.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/tables.css">
-    <link rel="stylesheet" href="/css/buttons.css">
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
     <script src="scripts/scripts.js"></script>
 </head>
@@ -22,13 +21,12 @@
     <header><h1>Logistic Company</h1></header>
     <div class="container">
         <div class="box-1">
-            <div class="box-headline"><h2>Потребители</h2></div>
+            <div class="box-headline"><h2>Всички поръчки</h2></div>
             <table>
                 <tr>
                     <th>ID</th>
                     <th>Име</th>
                     <th>Роля</th>
-                    <th>Операции</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,10 +35,6 @@
                         <td th:text="*{id}"></td>
                         <td th:text="*{username}"></td>
                         <td th:text="*{authorities}"></td>
-                        <td>
-                            <button class="roundButton editButton">Edit</button>
-                            <button class="roundButton deleteButton">Delete</button>
-                        </td>
                     </tr>
                 </th:block>
                 </tbody>

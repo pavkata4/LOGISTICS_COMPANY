@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="/css/container.css">
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/tables.css">
-    <link rel="stylesheet" href="/css/buttons.css">
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
 </head>
 <body>
@@ -19,17 +18,20 @@
     <header><h1>Logistic Company</h1></header>
     <div class="container">
         <div class="box-1">
-            <div class="box-headline"><h2>Влизане</h2></div>
-            <form th:action="@{/users/login}" th:method="post">
-                <div>
-                    <input class="roundButton roundFormWithBlackText" type="text" name="username" id="username" placeholder="Username" required/>
+            <div class="box-headline"><h2>Моите поръчки</h2></div>
+            <form class="authenticate-form login" th:action="@{/users/login}" th:method="post">
+                <div class="username field">
+                    <div class="label">Username</div>
+                    <input class="input" type="text" name="username" id="username" placeholder="Username" required/>
                 </div>
-                <div>
-                    <input class="roundButton roundFormWithBlackText" type="password" name="password" id="password" placeholder="Password" required/>
+                <div class="password field">
+                    <div class="label">Password</div>
+                    <input class="input" type="password" name="password" id="password" placeholder="Password" required/>
                 </div>
-                <div>
-                    <button class="roundButton roundFormWithBlackText editButton" type="submit">Login</button>
-                    <a th:href="@{/users/register}">Not signed in? Register</a>
+
+                <div class="authenticate-buttons">
+                    <button class="authenticate-button" type="submit">Login</button>
+                    <a class="authenticate-link" th:href="@{/users/register}">Not signed in? Register</a>
                 </div>
             </form>
         </div>

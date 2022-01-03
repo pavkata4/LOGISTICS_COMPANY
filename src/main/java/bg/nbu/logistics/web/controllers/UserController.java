@@ -31,7 +31,7 @@ public class UserController extends BaseController {
     private static final String USER_REGISTER_BINDING_MODEL = "userRegisterBindingModel";
     public static final String REGISTER_PATH = "/register";
     public static final String REGISTRATION = "registration";
-    public static final String ALL_USERS = "all_users";
+    public static final String ALL_USERS = "users/all_users";
     public static final String USERS = "/users";
     public static final String LOGIN_PATH = "/login";
     public static final String LOGIN = "login";
