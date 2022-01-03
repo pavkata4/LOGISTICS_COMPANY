@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +41,7 @@ class RoleServiceImplTest {
 
     @BeforeEach
     public void setUp() {
-        when(modelMapperMock.map(roleMock, RoleServiceModel.class)).thenReturn(roleServiceModelMock);
+       lenient().when(modelMapperMock.map(roleMock, RoleServiceModel.class)).thenReturn(roleServiceModelMock);
     }
 
     @Test

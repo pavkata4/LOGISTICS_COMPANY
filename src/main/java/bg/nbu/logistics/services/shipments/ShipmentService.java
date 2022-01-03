@@ -8,4 +8,8 @@ public interface ShipmentService {
     List<ShipmentServiceModel> findAllShipments();
 
     void delete(long id);
+
+    List<ShipmentServiceModel> findAllReceivedShipmentsByUsername(String username);
+
+    List<ShipmentServiceModel> findAllSentShipmentsByUsername(String username);
 }

@@ -1,10 +1,8 @@
 package bg.nbu.logistics.services.shipments;
 
-import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.empty;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -13,14 +11,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.modelmapper.ModelMapper;
 
+import bg.nbu.logistics.commons.utils.Mapper;
 import bg.nbu.logistics.domain.entities.Shipment;
 import bg.nbu.logistics.domain.models.service.ShipmentServiceModel;
 import bg.nbu.logistics.repositories.ShipmentRepository;
 
 @ExtendWith(MockitoExtension.class)
 class ShipmentServiceImplTest {
+    private static final String USERNAME = "username";
     private static final long ID = 1;
 
     @InjectMocks
@@ -30,7 +29,7 @@ class ShipmentServiceImplTest {
     private ShipmentRepository shipmentRepositoryMock;
 
     @Mock
-    private ModelMapper modelMapperMock;
+    private Mapper mapperMock;
 
     @Mock
     private Shipment shipmentMock;
@@ -39,18 +38,30 @@ class ShipmentServiceImplTest {
     private ShipmentServiceModel shipmentServiceModelMock;
 
     @Test
-    void testFindAllShipmentsNoShipmentsPresent() {
-        when(shipmentRepositoryMock.findAll()).thenReturn(emptyList());
+    void testFindAllShipments() {
+        when(shipmentRepositoryMock.findAll()).thenReturn(singletonList(shipmentMock));
+        when(mapperMock.mapCollection(singletonList(shipmentMock), ShipmentServiceModel.class))
+                .thenReturn(singletonList(shipmentServiceModelMock));
 
-        assertThat(shipmentService.findAllShipments(), empty());
+        assertThat(shipmentService.findAllShipments(), contains(shipmentServiceModelMock));
     }
 
     @Test
-    void testFindAllShipments() {
-        when(shipmentRepositoryMock.findAll()).thenReturn(singletonList(shipmentMock));
-        when(modelMapperMock.map(shipmentMock, ShipmentServiceModel.class)).thenReturn(shipmentServiceModelMock);
+    void testFindAllReceivedShipmentsByUsername() {
+        when(shipmentRepositoryMock.findAllByRecipient(USERNAME)).thenReturn(singletonList(shipmentMock));
+        when(mapperMock.mapCollection(singletonList(shipmentMock), ShipmentServiceModel.class))
+                .thenReturn(singletonList(shipmentServiceModelMock));
 
-        assertThat(shipmentService.findAllShipments(), contains(shipmentServiceModelMock));
+        assertThat(shipmentService.findAllReceivedShipmentsByUsername(USERNAME), contains(shipmentServiceModelMock));
+    }
+
+    @Test
+    void testFindAllSentShipmentsByUsername() {
+        when(shipmentRepositoryMock.findAllBySender(USERNAME)).thenReturn(singletonList(shipmentMock));
+        when(mapperMock.mapCollection(singletonList(shipmentMock), ShipmentServiceModel.class))
+                .thenReturn(singletonList(shipmentServiceModelMock));
+
+        assertThat(shipmentService.findAllSentShipmentsByUsername(USERNAME), contains(shipmentServiceModelMock));
     }
 
     @Test
