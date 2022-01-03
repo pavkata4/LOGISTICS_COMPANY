@@ -17,6 +17,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
     private static final String USERS_LOGIN = "/users/login";
     private static final String SHIPMENTS = "/all_shipments";
     private static final String MY_SHIPMENTS = "/my_shipments";
+    private static final String ALL_USERS = "/all_users";
     private static final String HOME = "/home";
     private static final String PASSWORD = "password";
     private static final String USERNAME = "username";
@@ -34,7 +35,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .csrf()
                     .disable()
                     .authorizeRequests()
-                .antMatchers(HOME, SHIPMENTS, MY_SHIPMENTS)
+                .antMatchers(HOME, SHIPMENTS, MY_SHIPMENTS, ALL_USERS)
                     .authenticated()
                 .antMatchers(INDEX, USERS_LOGIN, USERS_REGISTER)
                     .anonymous()

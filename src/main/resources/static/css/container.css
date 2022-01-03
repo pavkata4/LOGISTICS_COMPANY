@@ -18,7 +18,7 @@
     height: auto;
     /*border-radius: 25px;*/
     border: 1px solid black;
-    color: black
+    color: black;
 }
 
 .box-2 {
@@ -39,6 +39,7 @@
     align-items: center;
     /*border-radius: 25px;*/
     color: white;
+    margin-bottom: 2%;
 }
 
 header {
