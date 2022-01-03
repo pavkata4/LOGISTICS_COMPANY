@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -18,7 +17,6 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
     private static final String USERS_LOGIN = "/users/login";
     private static final String SHIPMENTS = "/all_shipments";
     private static final String MY_SHIPMENTS = "/my_shipments";
-    private static final String ALL_USERS = "/all_users";
     private static final String HOME = "/home";
     private static final String PASSWORD = "password";
     private static final String USERNAME = "username";
@@ -36,14 +34,6 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .csrf()
                     .disable()
                     .authorizeRequests()
-//                .antMatchers(HOME)
-//                    .authenticated()
-//                .antMatchers(SHIPMENTS, ALL_USERS)
-//                    .hasAuthority("ROLE_EMPLOYEE")
-//                .antMatchers(MY_SHIPMENTS)
-//                    .hasAuthority("ROLE_USER")
-//                .antMatchers(INDEX, USERS_LOGIN, USERS_REGISTER)
-//                    .permitAll()
                 .antMatchers(HOME, SHIPMENTS, MY_SHIPMENTS)
                     .authenticated()
                 .antMatchers(INDEX, USERS_LOGIN, USERS_REGISTER)
@@ -66,10 +56,10 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web
-                .ignoring()
+        web.ignoring()
                 .antMatchers("/**/*.js", "/**/*.css")
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/icon/**", "/scripts/**");
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/icon/**",
+                        "/scripts/**");
     }
 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

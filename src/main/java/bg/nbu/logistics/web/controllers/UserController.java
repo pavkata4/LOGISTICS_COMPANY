@@ -1,6 +1,7 @@
 package bg.nbu.logistics.web.controllers;
 
 import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_ANONYMOUS;
+import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
 import static java.util.stream.Collectors.toUnmodifiableList;
 
 import java.util.List;
@@ -70,6 +71,7 @@ public class UserController extends BaseController {
     }
     
     @DeleteMapping(DELETE + "/{id}")
+    @PreAuthorize(IS_AUTHENTICATED)
     public ModelAndView delete(@PathVariable(name = "id") long id) {
         userService.delete(id);
 
@@ -77,6 +79,7 @@ public class UserController extends BaseController {
     }
 
     @GetMapping
+    @PreAuthorize(IS_AUTHENTICATED)
     public ModelAndView fetchAll(ModelAndView modelAndView) {
         final List<UserViewModel> userViewModels = userService.findAll()
                 .stream()
