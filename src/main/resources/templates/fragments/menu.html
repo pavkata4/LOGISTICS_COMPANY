@@ -1,11 +1,13 @@
 <th:block th:fragment="menu">
-    <div th:if="${#request.isUserInRole('ROLE_ROOT')}">
-        <th:block th:replace="fragments/admin_menu"></th:block>
-    </div>
-    <div th:if="!${#request.isUserInRole('ROLE_ROOT')} and ${#request.isUserInRole('ROLE_EMPLOYEE')}">
-        <th:block th:replace="fragments/employee_menu"></th:block>
-    </div>
-    <div th:if="!${#request.isUserInRole('ROLE_ROOT')} and ${#request.isUserInRole('ROLE_USER')}">
-        <th:block th:replace="fragments/client_menu"></th:block>
-    </div>
+	<div th:if="${#request.isUserInRole('ROLE_ROOT')}">
+		<th:block th:replace="fragments/admin_menu"></th:block>
+	</div>
+	<div
+		th:if="!${#request.isUserInRole('ROLE_ROOT')} and (${#request.isUserInRole('ROLE_EMPLOYEE')} or ${#request.isUserInRole('ROLE_COURIER')})">
+		<th:block th:replace="fragments/employee_menu"></th:block>
+	</div>
+	<div
+		th:if="!${#request.isUserInRole('ROLE_ROOT')} and ${#request.isUserInRole('ROLE_USER')}">
+		<th:block th:replace="fragments/client_menu"></th:block>
+	</div>
 </th:block>
