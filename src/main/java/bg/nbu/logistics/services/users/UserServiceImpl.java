@@ -1,5 +1,6 @@
 package bg.nbu.logistics.services.users;
 
+import static bg.nbu.logistics.commons.constants.AuthorizationConstants.UNABLE_TO_FIND_USER_BY_NAME_MESSAGE;
 import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_USER;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
@@ -22,8 +23,6 @@ import bg.nbu.logistics.services.roles.RoleService;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private static final String UNABLE_TO_FIND_USER_BY_NAME_MESSAGE = "Unable to find user by name";
-
     private final UserRepository userRepository;
     private final RoleService roleService;
     private final ModelMapper modelMapper;
@@ -78,5 +77,4 @@ public class UserServiceImpl implements UserService {
 
         return user.isPresent() ? of(modelMapper.map(user.get(), UserServiceModel.class)) : empty();
     }
-
 }

@@ -8,4 +8,6 @@ import lombok.NoArgsConstructor;
 public final class AuthorizationConstants {
     public static final String IS_ANONYMOUS = "isAnonymous()";
     public static final String IS_AUTHENTICATED = "isAuthenticated()";
+    
+    public static final String UNABLE_TO_FIND_USER_BY_NAME_MESSAGE = "Unable to find user by name";
 }
