@@ -19,17 +19,15 @@
     <header><h1>Logistic Company</h1></header>
     <div class="container">
         <div class="box-1">
-            <div class="box-headline"><h2>Влизане</h2></div>
-            <form th:action="@{/users/login}" th:method="post">
+            <div class="box-headline"><h2>Добавяне на офис</h2></div>
+            <form th:action="@{/offices}" th:object="${office}" th:method="post">
                 <div>
-                    <input class="roundButton roundFormWithBlackText" type="text" name="username" id="username" placeholder="Username" required/>
-                </div>
+						<input class="roundButton roundFormWithBlackText" type="text"
+							name="address" id="address" placeholder="Адрес" th:field="*{address}"
+							required />
+					</div>
                 <div>
-                    <input class="roundButton roundFormWithBlackText" type="password" name="password" id="password" placeholder="Password" required/>
-                </div>
-                <div>
-                    <button class="roundButton roundFormWithBlackText editButton" type="submit">Login</button>
-                    <a th:href="@{/users/register}">Not signed in? Register</a>
+                    <button class="roundButton roundFormWithBlackText editButton" type="submit">Добавяне</button>
                 </div>
             </form>
         </div>

@@ -2,12 +2,16 @@ package bg.nbu.logistics.services.offices;
 
 import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_EMPLOYEE;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import bg.nbu.logistics.commons.utils.Mapper;
 import bg.nbu.logistics.domain.entities.Office;
 import bg.nbu.logistics.domain.entities.User;
+import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
 import bg.nbu.logistics.domain.models.service.RoleServiceModel;
 import bg.nbu.logistics.domain.models.service.UserServiceModel;
 import bg.nbu.logistics.repositories.OfficeRepository;
@@ -20,11 +24,13 @@ public class OfficeServiceImpl implements OfficeService {
 
     private final ModelMapper modelMapper;
     private final OfficeRepository officeRepository;
-
+    private final Mapper mapper;
+    
     @Autowired
-    public OfficeServiceImpl(OfficeRepository officeRepository, ModelMapper modelMapper) {
-        this.officeRepository = officeRepository;
+    public OfficeServiceImpl(ModelMapper modelMapper, OfficeRepository officeRepository, Mapper mapper) {
         this.modelMapper = modelMapper;
+        this.officeRepository = officeRepository;
+        this.mapper = mapper;
     }
 
     @Override
@@ -46,4 +52,18 @@ public class OfficeServiceImpl implements OfficeService {
                 .anyMatch(role -> role.equals(ROLE_EMPLOYEE) || role.equals(ROLE_EMPLOYEE));
     }
 
+    @Override
+    public void createOffice(Office office) {
+        officeRepository.saveAndFlush(office);
+    }
+
+    @Override
+    public List<OfficeServiceModel> getOffices() {
+        return mapper.mapCollection(officeRepository.findAll(), OfficeServiceModel.class);
+    }
+
+    @Override
+    public void removeOffice(long id) {
+        officeRepository.deleteById(id);
+    }
 }
