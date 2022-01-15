@@ -2,6 +2,15 @@ package bg.nbu.logistics.web.controllers;
 
 import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_ANONYMOUS;
 import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
+import static bg.nbu.logistics.commons.constants.paths.PathParamConstants.DELETE;
+import static bg.nbu.logistics.commons.constants.paths.UserPathParamConstants.LOGIN_PATH;
+import static bg.nbu.logistics.commons.constants.paths.UserPathParamConstants.REGISTER_PATH;
+import static bg.nbu.logistics.commons.constants.paths.UserPathParamConstants.USERS;
+import static bg.nbu.logistics.commons.constants.views.UserViewConstants.ALL_USERS;
+import static bg.nbu.logistics.commons.constants.views.UserViewConstants.LOGIN;
+import static bg.nbu.logistics.commons.constants.views.UserViewConstants.REGISTRATION;
+import static bg.nbu.logistics.commons.constants.views.UserViewConstants.USER_LIST_VIEW_MODELS;
+import static bg.nbu.logistics.commons.constants.views.UserViewConstants.USER_REGISTER_BINDING_MODEL;
 import static java.util.stream.Collectors.toUnmodifiableList;
 
 import java.util.List;
@@ -19,6 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriBuilder;
 
 import bg.nbu.logistics.domain.models.binding.UserRegisterBindingModel;
 import bg.nbu.logistics.domain.models.service.UserServiceModel;
@@ -26,24 +36,17 @@ import bg.nbu.logistics.domain.models.view.UserViewModel;
 import bg.nbu.logistics.services.users.UserService;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping(USERS)
 public class UserController extends BaseController {
-    private static final String USER_REGISTER_BINDING_MODEL = "userRegisterBindingModel";
-    public static final String REGISTER_PATH = "/register";
-    public static final String REGISTRATION = "registration";
-    public static final String ALL_USERS = "all_users";
-    public static final String USERS = "/users";
-    public static final String LOGIN_PATH = "/login";
-    public static final String LOGIN = "login";
-    public static final String DELETE = "/delete";
-
     private final ModelMapper modelMapper;
     private final UserService userService;
+    private final UriBuilder uriBuilder;
 
     @Autowired
-    public UserController(ModelMapper modelMapper, UserService userService) {
+    public UserController(ModelMapper modelMapper, UserService userService, UriBuilder uriBuilder) {
         this.modelMapper = modelMapper;
         this.userService = userService;
+        this.uriBuilder = uriBuilder;
     }
 
     @GetMapping(REGISTER_PATH)
@@ -61,7 +64,9 @@ public class UserController extends BaseController {
             @Valid @ModelAttribute(name = USER_REGISTER_BINDING_MODEL) UserRegisterBindingModel userRegisterBindingModel) {
         userService.register(modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
 
-        return redirect(USERS + LOGIN_PATH);
+        return redirect(uriBuilder.pathSegment(USERS, LOGIN_PATH)
+                .build()
+                .toString());
     }
 
     @GetMapping(LOGIN_PATH)
@@ -85,7 +90,7 @@ public class UserController extends BaseController {
                 .stream()
                 .map(user -> modelMapper.map(user, UserViewModel.class))
                 .collect(toUnmodifiableList());
-        modelAndView.addObject("userListViewModels", userViewModels);
+        modelAndView.addObject(USER_LIST_VIEW_MODELS, userViewModels);
 
         return view(ALL_USERS, modelAndView);
     }
