@@ -2,7 +2,6 @@ package bg.nbu.logistics.web.controllers;
 
 import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_ANONYMOUS;
 import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
-import static bg.nbu.logistics.commons.constants.paths.PathParamConstants.DELETE;
 import static bg.nbu.logistics.commons.constants.paths.UserPathParamConstants.LOGIN_PATH;
 import static bg.nbu.logistics.commons.constants.paths.UserPathParamConstants.REGISTER_PATH;
 import static bg.nbu.logistics.commons.constants.paths.UserPathParamConstants.USERS;
@@ -21,7 +20,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -75,7 +73,7 @@ public class UserController extends BaseController {
         return view(LOGIN);
     }
     
-    @DeleteMapping(DELETE + "/{id}")
+    @GetMapping("/{id}/delete")
     @PreAuthorize(IS_AUTHENTICATED)
     public ModelAndView delete(@PathVariable(name = "id") long id) {
         userService.delete(id);

@@ -8,10 +8,10 @@
     <meta name="keywords" content="university, project, new, bulgarian, university">
     <meta name="author" content="Nikola, Georgi, Iskren, Kristina, Simeon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/container.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/container.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/tables.css">
     <link rel="stylesheet" href="/css/buttons.css">
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
     <script src="scripts/scripts.js"></script>
@@ -20,48 +20,39 @@
 <div class="pageContent">
     <th:block th:include="~{fragments/menu}"></th:block>
     <header><h1>Logistic Company</h1></header>
-    
-    
+
+
     <div class="container">
-    
+
         <div class="box-1">
-				<div class="box-headline">
-					<h2>Офиси</h2>
-				</div>
-				<button
-					class="roundButton viewButton roundFormWithBlackText borderButton"
-					onclick="location.href='offices/manager';">Добавяне на
-					офис</button>
-				<table>
-					<tr>
-						<th>ID</th>
-						<th>Адрес</th>
-						<th>Операции</th>
-					</tr>
-					</thead>
-					<tbody>
-						<th:block th:each="office : ${officeListViewModels}"
-							th:object="${office}">
-							<tr>
-								<td th:text="*{id}"></td>
-								<td th:text="*{address}"></td>
-								<td>
-							<!-- th:action="@{/offices/{id}(id=${office.id})}" -->
-							
-							    <form th:action="@{/offices/{id}(id=${office.id})}" class="form" th:id="testId" th:method="delete">
-  <button class="roundButton editButton" type="submit">Helloworld</button>
-</form>
-							
-							
-									<button class="roundButton editButton">Edit</button> <a
-									th:href="@{'/offices/' + ${office.id}}"><button
-											class="roundButton deleteButton">Delete</button></a>
-								</td>
-							</tr>
-						</th:block>
-					</tbody>
-				</table>
-			</div>
+            <div class="box-headline">
+                <h2>Офиси</h2>
+            </div>
+            <button class="roundButton viewButton roundFormWithBlackText borderButton" onclick="location.href='/offices/manager';">Добавяне на офис</button>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Адрес</th>
+                    <th>Операции</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="office : ${officeListViewModels}"
+                          th:object="${office}">
+                    <tr>
+                        <td th:text="*{id}"></td>
+                        <td th:text="*{address}"></td>
+                        <td>
+                            <button class="roundButton editButton">Edit</button>
+                            <a th:href="@{'/offices/' + ${office.id} + '/delete'}">
+                                <button class="roundButton deleteButton">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
     </div>
     <th:block th:include="~{fragments/footer}"></th:block>
 </div>

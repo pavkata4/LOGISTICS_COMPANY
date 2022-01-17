@@ -42,7 +42,9 @@
                             <td th:text="*{weight}"></td>
                             <td>
                                 <button class="roundButton editButton">Edit</button>
-                                <button class="roundButton deleteButton">Delete</button>
+                                <a th:href="@{'/shipments/' + ${shipment.id} + '/delete'}">
+                                    <button class="roundButton deleteButton">Delete</button>
+                                </a>
                             </td>
                         </tr>
                     </th:block>

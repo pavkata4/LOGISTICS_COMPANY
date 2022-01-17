@@ -7,12 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import bg.nbu.logistics.commons.utils.Mapper;
@@ -60,7 +55,7 @@ public class OfficeController extends BaseController {
     public ModelAndView addOffice( @ModelAttribute(name = "office") Office office) {
         officeService.createOffice(office);
 
-        return redirect("offices");
+        return redirect("/offices");
     }
 
     @PostMapping("/{id}/staffing/{employeeName}")
@@ -75,12 +70,12 @@ public class OfficeController extends BaseController {
 
         return view("TO BE IMPLEMENTED");
     }
-    
-    @DeleteMapping("/{id}")
+
+    @RequestMapping(value="/{id}/delete")
     @PreAuthorize(IS_AUTHENTICATED)
-    public ModelAndView removeOffice(@PathVariable(name = "id") long id ) {
+    public ModelAndView deleteOffice(@PathVariable(name = "id") long id ) {
         officeService.removeOffice(id);
 
-        return redirect("offices");
+        return redirect("/offices");
     }
 }
