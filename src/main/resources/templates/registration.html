@@ -16,42 +16,42 @@
 </head>
 <body>
 <div class="pageContent">
-    <header><h1>Logistic Company</h1></header>
+    <header><h1>Логистична компания</h1></header>
     <div class="container">
         <div class="box-1">
             <div class="box-headline"><h2>Регистрация</h2></div>
             <form class="authenticate-form register" th:action="@{/users/register}" th:method="post"
                   th:object="${userRegisterBindingModel}">
                 <div>
-                    <input class="roundButton roundFormWithBlackText" type="text" name="username" placeholder="Username" required/>
+                    <input class="roundButton roundFormWithBlackText" type="text" name="username" placeholder="Потребителско име" required/>
                 </div>
                 <div>
-                    <input class="roundButton roundFormWithBlackText" type="password" name="password" placeholder="Password" required/>
+                    <input class="roundButton roundFormWithBlackText" type="password" name="password" placeholder="Парола" required/>
                 </div>
                 <div>
-                    <input class="roundButton roundFormWithBlackText" type="text" name="email" id="email" placeholder="Email"/>
+                    <input class="roundButton roundFormWithBlackText" type="text" name="email" id="email" placeholder="Имейл"/>
                 </div>
                 <div>
-                    <button class="roundButton roundFormWithBlackText editButton" type="submit">Register</button>
-                    <a th:href="@{/users/login}">I am already registered</a>
+                    <button class="roundButton roundFormWithBlackText editButton" type="submit">Регистрация</button>
+                    <a th:href="@{/users/login}">Имате профил? Вход</a>
                 </div>
             </form>
         </div>
     </div>
     <footer class="footer">
         <div class="box-footer">
-            <h2 class="head-text-footer">Logistic Company</h2>
-            <h3 class="footer-h3-size">LogisticCompany е проект за Нов Български Университет,
+            <h2 class="head-text-footer">Логистична компания</h2>
+            <h3 class="footer-h3-size">Логистична компания е проект за Нов Български Университет,
                 разработен със Spring.</h3>
         </div>
         <div class="box-footer">
-            <h2 class="head-text-footer">Logistic Company</h2>
-            <h3 class="footer-h3-size">LogisticCompany е проект за Нов Български Университет,
+            <h2 class="head-text-footer">Логистична компания</h2>
+            <h3 class="footer-h3-size">Логистична компания е проект за Нов Български Университет,
                 разработен със Spring.</h3>
         </div>
         <div class="box-footer">
-            <h2 class="head-text-footer">Logistic Company</h2>
-            <h3 class="footer-h3-size">LogisticCompany е проект за Нов Български Университет,
+            <h2 class="head-text-footer">Логистична компания</h2>
+            <h3 class="footer-h3-size">Логистична компания е проект за Нов Български Университет,
                 разработен със Spring.</h3>
         </div>
     </footer>

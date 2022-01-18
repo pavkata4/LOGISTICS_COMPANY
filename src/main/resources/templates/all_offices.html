@@ -19,7 +19,7 @@
 <body>
 <div class="pageContent">
     <th:block th:include="~{fragments/menu}"></th:block>
-    <header><h1>Logistic Company</h1></header>
+    <header><h1>Логистична компания</h1></header>
 
 
     <div class="container">
@@ -35,7 +35,6 @@
                     <th>Адрес</th>
                     <th>Операции</th>
                 </tr>
-                </thead>
                 <tbody>
                 <th:block th:each="office : ${officeListViewModels}"
                           th:object="${office}">
@@ -43,9 +42,9 @@
                         <td th:text="*{id}"></td>
                         <td th:text="*{address}"></td>
                         <td>
-                            <button class="roundButton editButton">Edit</button>
+                            <button class="roundButton editButton">Редактиране</button>
                             <a th:href="@{'/offices/' + ${office.id} + '/delete'}">
-                                <button class="roundButton deleteButton">Delete</button>
+                                <button class="roundButton deleteButton">Изтрий</button>
                             </a>
                         </td>
                     </tr>
