@@ -59,7 +59,7 @@ public class ShipmentController extends BaseController {
         return view(MY_SHIPMENTS, modelAndView);
     }
 
-    @GetMapping("/shipments/{id}/delete")
+    @GetMapping("/{id}/delete")
     @PreAuthorize(IS_AUTHENTICATED)
     public ModelAndView delete(@PathVariable(name = "id") long id) {
         shipmentService.delete(id);

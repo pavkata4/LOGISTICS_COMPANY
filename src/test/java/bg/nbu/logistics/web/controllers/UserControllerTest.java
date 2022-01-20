@@ -17,7 +17,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.springframework.boot.jdbc.EmbeddedDatabaseConnection.H2;
 import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -113,7 +112,7 @@ class UserControllerTest {
     @Test
     @WithMockUser(username = USERNAME)
     void testDelete() throws Exception {
-        mockMvc.perform(delete(uriBuilder.pathSegment(USERS, DELETE, Long.toString(findUserByUsername().getId()))
+        mockMvc.perform(get(uriBuilder.pathSegment(USERS, Long.toString(findUserByUsername().getId()), DELETE)
                 .build()))
                 .andExpect(redirectedUrl(USERS));
     }

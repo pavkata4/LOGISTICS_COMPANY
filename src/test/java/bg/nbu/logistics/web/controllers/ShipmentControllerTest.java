@@ -1,6 +1,7 @@
 package bg.nbu.logistics.web.controllers;
 
 import static bg.nbu.logistics.commons.constants.RoleConstants.EMPLOYEE;
+import static bg.nbu.logistics.commons.constants.paths.PathParamConstants.DELETE;
 import static bg.nbu.logistics.commons.constants.paths.ShipmentPathParamConstants.SHIPMENTS;
 import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.ALL_SHIPMENTS;
 import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.MY_SHIPMENTS;
@@ -14,7 +15,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.springframework.boot.jdbc.EmbeddedDatabaseConnection.H2;
 import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
@@ -110,7 +110,7 @@ class ShipmentControllerTest {
     @Test
     @WithMockUser()
     void testDelete() throws Exception {
-        mockMvc.perform(delete(uriBuilder.pathSegment(SHIPMENTS, Long.toString(findShipmentBySender().getId()))
+        mockMvc.perform(get(uriBuilder.pathSegment(SHIPMENTS, Long.toString(findShipmentBySender().getId()), DELETE)
                 .build()))
                 .andExpect(redirectedUrl(ALL_SHIPMENTS));
     }
