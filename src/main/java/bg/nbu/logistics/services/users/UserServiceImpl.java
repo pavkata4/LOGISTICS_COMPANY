@@ -6,9 +6,10 @@ import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static java.util.stream.Collectors.toUnmodifiableList;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+import bg.nbu.logistics.domain.entities.Role;
+import bg.nbu.logistics.domain.models.service.RoleServiceModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -64,6 +65,24 @@ public class UserServiceImpl implements UserService {
                 .stream()
                 .map(user -> modelMapper.map(user, UserServiceModel.class))
                 .collect(toUnmodifiableList());
+    }
+
+    @Override
+    public UserServiceModel findById(long id) {
+        User user = userRepository.findById(id).get();
+        UserServiceModel userServiceModel = new UserServiceModel();
+        userServiceModel.setId(user.getId());
+        userServiceModel.setUsername(user.getUsername());
+        userServiceModel.setPassword(user.getPassword());
+        Set<RoleServiceModel> roleServiceModelList = new HashSet<>();
+        RoleServiceModel roleServiceModel = new RoleServiceModel();
+        for (Role role : user.getAuthorities()) {
+            roleServiceModel.setAuthority(role.getAuthority());
+            roleServiceModelList.add(roleServiceModel);
+        }
+        userServiceModel.setAuthorities(roleServiceModelList);
+
+        return userServiceModel;
     }
 
     @Override

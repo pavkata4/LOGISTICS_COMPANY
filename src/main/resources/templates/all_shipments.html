@@ -41,8 +41,10 @@
                             <td th:text="*{address}"></td>
                             <td th:text="*{weight}"></td>
                             <td>
-                                <button class="roundButton editButton">Редактиране</button>
-                                <a th:href="@{'/shipments/' + ${shipment.id} + '/delete'}">
+                                <a th:href="@{'/shipments/edit-shipment/' + ${shipment.id}}">
+                                    <button class="roundButton editButton">Редактиране</button>
+                                </a>
+                                <a th:href="@{'/shipments/delete/' + ${shipment.id}}">
                                     <button class="roundButton deleteButton">Изтрий</button>
                                 </a>
                             </td>

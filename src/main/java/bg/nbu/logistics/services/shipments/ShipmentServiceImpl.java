@@ -2,6 +2,7 @@ package bg.nbu.logistics.services.shipments;
 
 import java.util.List;
 
+import bg.nbu.logistics.domain.entities.Shipment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,28 @@ public class ShipmentServiceImpl implements ShipmentService {
     @Override
     public List<ShipmentServiceModel> findAllSentShipmentsByUsername(final String username) {
         return mapper.mapCollection(shipmentRepository.findAllBySender(username), ShipmentServiceModel.class);
+    }
+
+    @Override
+    public ShipmentServiceModel findShipmentById(long id) {
+        Shipment shipment = shipmentRepository.findById(id).get();
+        ShipmentServiceModel shipmentServiceModel = new ShipmentServiceModel();
+        shipmentServiceModel.setId(shipment.getId());
+        shipmentServiceModel.setSender(shipment.getSender());
+        shipmentServiceModel.setRecipient(shipment.getRecipient());
+        shipmentServiceModel.setAddress(shipment.getAddress());
+        shipmentServiceModel.setWeight(shipment.getWeight());
+        return shipmentServiceModel;
+    }
+
+    @Override
+    public Shipment createNewShipment(Shipment shipment) {
+        return shipmentRepository.save(shipment);
+    }
+
+    @Override
+    public Shipment updateExistingShipment(Shipment shipment) {
+        return shipmentRepository.findById(shipment.getId()).map(updateShipment->{return shipmentRepository.save(shipment);}).get();
     }
     
     @Override

@@ -4,6 +4,8 @@ import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_AUTHE
 import static bg.nbu.logistics.commons.constants.paths.ShipmentPathParamConstants.SHIPMENTS;
 import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.ALL_SHIPMENTS;
 import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.MY_SHIPMENTS;
+import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.CREATE_SHIPMENT;
+import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.EDIT_SHIPMENT;
 import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.RECEIVED_SHIPMENT_VIEW_MODELS;
 import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.SENT_SHIPMENT_VIEW_MODELS;
 import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.SHIPMENT_VIEW_MODELS;
@@ -11,12 +13,12 @@ import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.SHI
 import java.security.Principal;
 import java.util.List;
 
+import bg.nbu.logistics.domain.entities.Shipment;
+import bg.nbu.logistics.domain.models.service.ShipmentServiceModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import bg.nbu.logistics.commons.constants.paths.ShipmentPathParamConstants;
@@ -59,11 +61,52 @@ public class ShipmentController extends BaseController {
         return view(MY_SHIPMENTS, modelAndView);
     }
 
-    @GetMapping("/{id}/delete")
+    @RequestMapping(ShipmentPathParamConstants.CREATE_SHIPMENT)
     @PreAuthorize(IS_AUTHENTICATED)
-    public ModelAndView delete(@PathVariable(name = "id") long id) {
+    public ModelAndView createShipment(final Principal principal, ModelAndView modelAndView) {
+        Shipment shipment = new Shipment();
+        shipment.setSender(principal.getName());
+        modelAndView.addObject("shipment", shipment);
+        return view(CREATE_SHIPMENT, modelAndView);
+    }
+
+    @PostMapping(ShipmentPathParamConstants.CREATE_SHIPMENT)
+    @PreAuthorize(IS_AUTHENTICATED)
+    public ModelAndView saveShipment(@ModelAttribute("shipment") Shipment shipment, ModelAndView modelAndView) {
+        shipmentService.createNewShipment(shipment);
+        modelAndView.setViewName("redirect:/" + SHIPMENTS);
+        return modelAndView;
+    }
+
+    @RequestMapping(ShipmentPathParamConstants.EDIT_SHIPMENT + ShipmentPathParamConstants.ID)
+    @PreAuthorize(IS_AUTHENTICATED)
+    public ModelAndView editShipment(@PathVariable(name = "id") long id, ModelAndView modelAndView) {
+        ShipmentServiceModel shipment = shipmentService.findShipmentById(id);
+        modelAndView.addObject("shipment", shipment);
+        return view(EDIT_SHIPMENT, modelAndView);
+    }
+
+    @RequestMapping(ShipmentPathParamConstants.EDIT_SHIPMENT)
+    @PreAuthorize(IS_AUTHENTICATED)
+    public ModelAndView updateShipment(@ModelAttribute("shipment") ShipmentServiceModel shipmentServiceModel, ModelAndView modelAndView) {
+        Shipment shipment = new Shipment();
+        shipment.setId(shipmentServiceModel.getId());
+        shipment.setSender(shipmentServiceModel.getSender());
+        shipment.setRecipient(shipmentServiceModel.getRecipient());
+        shipment.setAddress(shipmentServiceModel.getAddress());
+        shipment.setWeight(shipmentServiceModel.getWeight());
+        shipmentService.updateExistingShipment(shipment);
+        modelAndView.setViewName("redirect:/" + SHIPMENTS);
+        return modelAndView;
+    }
+
+
+    @GetMapping("/delete" + ShipmentPathParamConstants.ID)
+    @PreAuthorize(IS_AUTHENTICATED)
+    public ModelAndView delete(ModelAndView modelAndView, @PathVariable(name = "id") long id) {
         shipmentService.delete(id);
 
-        return redirect(ALL_SHIPMENTS);
+        modelAndView.setViewName("redirect:/" + SHIPMENTS);
+        return modelAndView;
     }
 }

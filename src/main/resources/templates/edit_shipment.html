@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <title>Logistic company</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="University project for New Bulgarian University">
+    <meta name="keywords" content="university, project, new, bulgarian, university">
+    <meta name="author" content="Nikola, Georgi, Iskren, Kristina, Simeon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/container.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/tables.css">
+    <link rel="stylesheet" href="/css/buttons.css">
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+</head>
+<body>
+<div class="pageContent">
+    <th:block th:include="~{fragments/menu}"></th:block>
+    <header><h1>Logistic Company</h1></header>
+    <div class="container">
+        <div class="box-1">
+            <div class="box-headline"><h2>Редактиране на пратка</h2></div>
+            <form th:action="@{/shipments/edit-shipment}" th:object="${shipment}" th:method="put">
+                <div>
+                    <input class="roundButton roundFormWithBlackText" type="text" name="id"
+                           id="shipment_id" placeholder="ID" th:field="*{id}"
+                           th:value="*{id}" readonly required />
+                    <input class="roundButton roundFormWithBlackText" type="text" name="sender"
+                           id="sender" placeholder="Изпращач" th:field="*{sender}"
+                           th:value="*{sender}" readonly required />
+                    <input class="roundButton roundFormWithBlackText" type="text" name="recipient"
+                           id="recipient" placeholder="Получател" th:field="*{recipient}"
+                           th:value="*{recipient}" required />
+                    <input class="roundButton roundFormWithBlackText" type="text" name="address"
+                           id="address" placeholder="Адрес" th:field="*{address}"
+                           th:value="*{address}" required />
+                    <input class="roundButton roundFormWithBlackText" type="text" name="weight"
+                           id="weightt" placeholder="Тежест" th:field="*{weight}"
+                           th:value="*{weight}" required />
+                </div>
+                <div>
+                    <button class="roundButton roundFormWithBlackText editButton" type="submit">Добавяне</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <th:block th:include="~{fragments/footer}"></th:block>
+</div>
+</body>
+</html>
