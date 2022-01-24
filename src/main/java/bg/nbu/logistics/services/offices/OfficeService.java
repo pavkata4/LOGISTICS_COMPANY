@@ -1,6 +1,7 @@
 package bg.nbu.logistics.services.offices;
 
 import java.util.List;
+import java.util.Optional;
 
 import bg.nbu.logistics.domain.entities.Office;
 import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
@@ -14,4 +15,6 @@ public interface OfficeService {
     List<OfficeServiceModel> getOffices();
 
     void removeOffice(long id);
+    
+    Optional<OfficeServiceModel> findOfficeByAddress(String address);
 }

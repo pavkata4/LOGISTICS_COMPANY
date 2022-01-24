@@ -1,60 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Logistic company</title>
-    <meta charset="UTF-8">
-    <meta name="description" content="University project for New Bulgarian University">
-    <meta name="keywords" content="university, project, new, bulgarian, university">
-    <meta name="author" content="Nikola, Georgi, Iskren, Kristina, Simeon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/menu.css">
-    <link rel="stylesheet" href="/css/container.css">
-    <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="/css/tables.css">
-    <link rel="stylesheet" href="/css/buttons.css">
-    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+<title>Logistic company</title>
+<meta charset="UTF-8">
+<meta name="description"
+	content="University project for New Bulgarian University">
+<meta name="keywords"
+	content="university, project, new, bulgarian, university">
+<meta name="author" content="Nikola, Georgi, Iskren, Kristina, Simeon">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/css/menu.css">
+<link rel="stylesheet" href="/css/container.css">
+<link rel="stylesheet" href="/css/footer.css">
+<link rel="stylesheet" href="/css/tables.css">
+<link rel="stylesheet" href="/css/buttons.css">
+<script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
 </head>
 <body>
-<div class="pageContent">
-    <header><h1>Логистична компания</h1></header>
-    <div class="container">
-        <div class="box-1">
-            <div class="box-headline"><h2>Регистрация</h2></div>
-            <form class="authenticate-form register" th:action="@{/users/register}" th:method="post"
-                  th:object="${userRegisterBindingModel}">
-                <div>
-                    <input class="roundButton roundFormWithBlackText" type="text" name="username" placeholder="Потребителско име" required/>
-                </div>
-                <div>
-                    <input class="roundButton roundFormWithBlackText" type="password" name="password" placeholder="Парола" required/>
-                </div>
-                <div>
-                    <input class="roundButton roundFormWithBlackText" type="text" name="email" id="email" placeholder="Имейл"/>
-                </div>
-                <div>
-                    <button class="roundButton roundFormWithBlackText editButton" type="submit">Регистрация</button>
-                    <a th:href="@{/users/login}">Имате профил? Вход</a>
-                </div>
-            </form>
-        </div>
-    </div>
-    <footer class="footer">
-        <div class="box-footer">
-            <h2 class="head-text-footer">Логистична компания</h2>
-            <h3 class="footer-h3-size">Логистична компания е проект за Нов Български Университет,
-                разработен със Spring.</h3>
-        </div>
-        <div class="box-footer">
-            <h2 class="head-text-footer">Логистична компания</h2>
-            <h3 class="footer-h3-size">Логистична компания е проект за Нов Български Университет,
-                разработен със Spring.</h3>
-        </div>
-        <div class="box-footer">
-            <h2 class="head-text-footer">Логистична компания</h2>
-            <h3 class="footer-h3-size">Логистична компания е проект за Нов Български Университет,
-                разработен със Spring.</h3>
-        </div>
-    </footer>
-</div>
+	<div class="pageContent">
+		<header>
+			<h1>Логистична компания</h1>
+		</header>
+		<div class="container">
+			<div class="box-1">
+				<div class="box-headline">
+					<h2>Регистрация</h2>
+				</div>
+				<form class="authenticate-form register"
+					th:action="@{/users/register}" th:method="post"
+					th:object="${userRegisterBindingModel}">
+					<div>
+						<input class="roundButton roundFormWithBlackText" type="text"
+							name="username" placeholder="Потребителско име" required />
+					</div>
+					<div>
+						<input class="roundButton roundFormWithBlackText" type="password"
+							name="password" placeholder="Парола" required />
+					</div>
+					<div>
+						<button class="roundButton roundFormWithBlackText editButton"
+							type="submit">Регистрация</button>
+						<a th:href="@{/users/login}">Имате профил? Вход</a>
+					</div>
+				</form>
+			</div>
+		</div>
+		<footer class="footer">
+			<div class="box-footer">
+				<h2 class="head-text-footer">Логистична компания</h2>
+				<h3 class="footer-h3-size">Логистична компания е проект за Нов
+					Български Университет, разработен със Spring.</h3>
+			</div>
+			<div class="box-footer">
+				<h2 class="head-text-footer">Логистична компания</h2>
+				<h3 class="footer-h3-size">Логистична компания е проект за Нов
+					Български Университет, разработен със Spring.</h3>
+			</div>
+			<div class="box-footer">
+				<h2 class="head-text-footer">Логистична компания</h2>
+				<h3 class="footer-h3-size">Логистична компания е проект за Нов
+					Български Университет, разработен със Spring.</h3>
+			</div>
+		</footer>
+	</div>
 </body>
 </html>

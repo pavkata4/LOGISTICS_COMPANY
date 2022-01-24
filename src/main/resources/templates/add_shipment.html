@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/css/tables.css">
     <link rel="stylesheet" href="/css/buttons.css">
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <script src="/scripts/scripts.js"></script>
 </head>
 <body>
 <div class="pageContent">
@@ -33,13 +34,16 @@
                            id="address" placeholder="Адрес" th:field="*{address}"
                            required />
                     <input class="roundButton roundFormWithBlackText" type="text" name="weight"
-                           id="weightt" placeholder="Тежест" th:field="*{weight}"
+                           id="weight" placeholder="Тежест" th:field="*{weight}"
                            required />
                 </div>
                 <div>
                     <button class="roundButton roundFormWithBlackText editButton" type="submit">Добавяне</button>
                 </div>
             </form>
+            <div>
+                <button class="roundButton roundFormWithBlackText viewButton" onclick="calculatePrice()">Сметни цена</button>
+            </div>
         </div>
     </div>
     <th:block th:include="~{fragments/footer}"></th:block>

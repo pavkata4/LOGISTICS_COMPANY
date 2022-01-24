@@ -22,7 +22,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "offices")
 public class Office extends BaseEntity {
-    @Column(name = "address", nullable = false)
+    @Column(name = "address", unique = true, nullable = false)
     private String address;
     
     @ManyToMany(targetEntity = User.class, fetch = EAGER)

@@ -1,8 +1,11 @@
 package bg.nbu.logistics.services.offices;
 
 import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_EMPLOYEE;
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,5 +68,15 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     public void removeOffice(long id) {
         officeRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<OfficeServiceModel> findOfficeByAddress(String address) {
+        final Optional<Office> office = officeRepository.findByAddress(address);
+        if (office.isEmpty()) {
+            return empty();
+        }
+
+        return of(modelMapper.map(office.get(), OfficeServiceModel.class));
     }
 }

@@ -1,23 +1,30 @@
 package bg.nbu.logistics.services.shipments;
 
 import java.util.List;
+import java.util.Optional;
 
 import bg.nbu.logistics.domain.entities.Shipment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import bg.nbu.logistics.commons.utils.Mapper;
+import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
 import bg.nbu.logistics.domain.models.service.ShipmentServiceModel;
 import bg.nbu.logistics.repositories.ShipmentRepository;
+import bg.nbu.logistics.services.offices.OfficeService;
 
 @Service
 public class ShipmentServiceImpl implements ShipmentService {
+    private static final double PERSONAL_ADDRESS_PRICE_MULTIPLIER = 1.5;
+    
     private final ShipmentRepository shipmentRepository;
     private final Mapper mapper;
+    private final OfficeService officeService;
 
     @Autowired
-    public ShipmentServiceImpl(ShipmentRepository shipmentRepository, Mapper mapper) {
+    public ShipmentServiceImpl(ShipmentRepository shipmentRepository, OfficeService officeService, Mapper mapper) {
         this.shipmentRepository = shipmentRepository;
+        this.officeService = officeService;
         this.mapper = mapper;
     }
 
@@ -50,16 +57,30 @@ public class ShipmentServiceImpl implements ShipmentService {
 
     @Override
     public Shipment createNewShipment(Shipment shipment) {
-        return shipmentRepository.save(shipment);
+        final Optional<OfficeServiceModel> office = officeService.findOfficeByAddress(shipment.getAddress());
+        shipment.setPrice(calculatePrice(office,shipment));
+        
+        return shipmentRepository.saveAndFlush(shipment);
     }
 
     @Override
     public Shipment updateExistingShipment(Shipment shipment) {
-        return shipmentRepository.findById(shipment.getId()).map(updateShipment->{return shipmentRepository.save(shipment);}).get();
+        return shipmentRepository.findById(shipment.getId())
+                .map(updateShipment -> {
+                    return shipmentRepository.save(shipment);
+                })
+                .get();
     }
     
     @Override
     public void delete(final long id) {
         shipmentRepository.deleteById(id);
+    }
+
+    private double calculatePrice(Optional<OfficeServiceModel> office, Shipment shipment) {
+        if (office.isEmpty()) {
+            return shipment.getWeight() * PERSONAL_ADDRESS_PRICE_MULTIPLIER;
+        }
+        return shipment.getWeight();
     }
 }

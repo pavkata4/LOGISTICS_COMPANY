@@ -16,7 +16,7 @@ public interface ShipmentService {
 
     ShipmentServiceModel findShipmentById(long id);
 
-    public Shipment createNewShipment(Shipment shipment);
+    Shipment createNewShipment(Shipment shipment);
 
-    public Shipment updateExistingShipment(Shipment shipment);
+    Shipment updateExistingShipment(Shipment shipment);
 }
