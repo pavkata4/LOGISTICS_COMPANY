@@ -48,13 +48,6 @@ public class OfficeServiceImpl implements OfficeService {
                         () -> log.error(OFFICE_NOT_FOUND_ERROR_TEMPLATE, officeId, userServiceModel.getUsername()));
     }
 
-    private boolean isUserAnEmployee(UserServiceModel userServiceModel) {
-        return userServiceModel.getAuthorities()
-                .stream()
-                .map(RoleServiceModel::getAuthority)
-                .anyMatch(role -> role.equals(ROLE_EMPLOYEE) || role.equals(ROLE_EMPLOYEE));
-    }
-
     @Override
     public void createOffice(Office office) {
         officeRepository.saveAndFlush(office);
@@ -78,5 +71,12 @@ public class OfficeServiceImpl implements OfficeService {
         }
 
         return of(modelMapper.map(office.get(), OfficeServiceModel.class));
+    }
+    
+    private boolean isUserAnEmployee(UserServiceModel userServiceModel) {
+        return userServiceModel.getAuthorities()
+                .stream()
+                .map(RoleServiceModel::getAuthority)
+                .anyMatch(role -> role.equals(ROLE_EMPLOYEE) || role.equals(ROLE_EMPLOYEE));
     }
 }

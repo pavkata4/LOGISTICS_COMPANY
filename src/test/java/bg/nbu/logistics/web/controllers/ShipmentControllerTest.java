@@ -48,6 +48,7 @@ import bg.nbu.logistics.services.users.UserService;
 @AutoConfigureTestDatabase(connection = H2)
 @DirtiesContext(classMode = AFTER_EACH_TEST_METHOD)
 class ShipmentControllerTest {
+    private static final double PRICE = 30;
     private static final String SENDER = "sender";
     private static final String RECIPIENT = "recipient";
     private static final String ADDRESS = "address";
@@ -73,8 +74,8 @@ class ShipmentControllerTest {
 
     @BeforeEach
     void setUp() {
-        shipmentRepository.saveAndFlush(new Shipment(SENDER, RECIPIENT, ADDRESS, WEIGHT));
-        shipmentRepository.saveAndFlush(new Shipment(RECIPIENT, SENDER, ADDRESS, WEIGHT));
+        shipmentRepository.saveAndFlush(new Shipment(SENDER, RECIPIENT, ADDRESS, WEIGHT, PRICE));
+        shipmentRepository.saveAndFlush(new Shipment(RECIPIENT, SENDER, ADDRESS, WEIGHT, PRICE));
     }
 
     @Test
@@ -110,9 +111,9 @@ class ShipmentControllerTest {
     @Test
     @WithMockUser()
     void testDelete() throws Exception {
-        mockMvc.perform(get(uriBuilder.pathSegment(SHIPMENTS, Long.toString(findShipmentBySender().getId()), DELETE)
+        mockMvc.perform(get(uriBuilder.pathSegment(SHIPMENTS, DELETE, Long.toString(findShipmentBySender().getId()))
                 .build()))
-                .andExpect(redirectedUrl(ALL_SHIPMENTS));
+                .andExpect(redirectedUrl("/" + SHIPMENTS));
     }
 
     private ShipmentServiceModel findShipmentBySender() {

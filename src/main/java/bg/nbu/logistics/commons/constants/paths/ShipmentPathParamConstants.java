@@ -10,6 +10,4 @@ public final class ShipmentPathParamConstants {
     public static final String MY_SHIPMENTS = "my-shipments";
     public static final String CREATE_SHIPMENT = "send-shipment";
     public static final String EDIT_SHIPMENT = "edit-shipment";
-
-    public static final String ID = "/{id}";
 }

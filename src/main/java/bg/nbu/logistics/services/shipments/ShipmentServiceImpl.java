@@ -15,7 +15,7 @@ import bg.nbu.logistics.services.offices.OfficeService;
 
 @Service
 public class ShipmentServiceImpl implements ShipmentService {
-    private static final double PERSONAL_ADDRESS_PRICE_MULTIPLIER = 1.5;
+    public static final double PERSONAL_ADDRESS_PRICE_MULTIPLIER = 1.5;
     
     private final ShipmentRepository shipmentRepository;
     private final Mapper mapper;
@@ -56,7 +56,7 @@ public class ShipmentServiceImpl implements ShipmentService {
     }
 
     @Override
-    public Shipment createNewShipment(Shipment shipment) {
+    public Shipment createShipment(Shipment shipment) {
         final Optional<OfficeServiceModel> office = officeService.findOfficeByAddress(shipment.getAddress());
         shipment.setPrice(calculatePrice(office,shipment));
         

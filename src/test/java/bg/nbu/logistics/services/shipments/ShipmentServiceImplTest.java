@@ -1,15 +1,18 @@
 package bg.nbu.logistics.services.shipments;
 
+import static bg.nbu.logistics.services.shipments.ShipmentServiceImpl.PERSONAL_ADDRESS_PRICE_MULTIPLIER;
 import static java.util.Collections.singletonList;
+import static java.util.Optional.of;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
-import org.hamcrest.Matchers;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -48,9 +51,18 @@ class ShipmentServiceImplTest {
     @Mock
     private OfficeService officeServiceMock;
     
+    @Mock
+    private OfficeServiceModel officeServiceModelMock;
+    
+    @BeforeEach
+    public void setUp() {
+        lenient().when(shipmentMock.getAddress()).thenReturn(ADDRESS);
+        lenient().when(shipmentMock.getWeight()).thenReturn(WEIGHT);
+        lenient().when(shipmentRepositoryMock.saveAndFlush(shipmentMock)).thenReturn(shipmentMock);
+        
+    }
     @Test
     void testFindAllShipments() {
-        when(shipmentMock.getWeight()).thenReturn(WEIGHT);
         when(shipmentRepositoryMock.findAll()).thenReturn(singletonList(shipmentMock));
         when(mapperMock.mapCollection(singletonList(shipmentMock), ShipmentServiceModel.class))
                 .thenReturn(singletonList(shipmentServiceModelMock));
@@ -84,17 +96,22 @@ class ShipmentServiceImplTest {
     }
     
     @Test
-    void testCreateNewShipmentToOffice() {
-//        when(officeServiceMock.findOfficeByAddress(ADDRESS)).thenReturn(Optional.<OfficeServiceModel>empty());
+    void testCreateShipmentToOffice() {
+        when(officeServiceMock.findOfficeByAddress(ADDRESS)).thenReturn(of(officeServiceModelMock));
+
+        assertThat(shipmentService.createShipment(shipmentMock), equalTo(shipmentMock));
+
+        verify(shipmentMock).setPrice(WEIGHT);
+        verify(shipmentRepositoryMock).saveAndFlush(shipmentMock);
     }
     
     @Test
     void testCreateNewShipmentToPersonalAddress() {
         when(officeServiceMock.findOfficeByAddress(ADDRESS)).thenReturn(Optional.<OfficeServiceModel>empty());
 
-        assertThat(shipmentService.createNewShipment(shipmentMock), equalTo(shipmentMock));
+        assertThat(shipmentService.createShipment(shipmentMock), equalTo(shipmentMock));
 
-        verify(shipmentMock).setPrice(WEIGHT);
+        verify(shipmentMock).setPrice(WEIGHT * PERSONAL_ADDRESS_PRICE_MULTIPLIER);
         verify(shipmentRepositoryMock).saveAndFlush(shipmentMock);
     }
 }

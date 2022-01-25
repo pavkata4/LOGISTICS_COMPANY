@@ -12,4 +12,6 @@ public final class PathParamConstants {
 
     public static final String HOME = "home";
     public static final String INDEX = "index";
+    
+    public static final String ID = "/{id}";
 }
