@@ -1,5 +1,9 @@
 package bg.nbu.logistics.domain.entities;
 
+import static java.time.LocalDate.now;
+
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -31,4 +35,7 @@ public class Shipment extends BaseEntity {
     
     @Min(value = 1, message = "Minimum price is 1")
     private double price;
+    
+    @Column(name = "send_date", nullable = false, updatable = false)
+    private LocalDate sendDate = now();
 }

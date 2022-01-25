@@ -1,13 +1,14 @@
 package bg.nbu.logistics.services.shipments;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import bg.nbu.logistics.domain.entities.Shipment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import bg.nbu.logistics.commons.utils.Mapper;
+import bg.nbu.logistics.domain.entities.Shipment;
 import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
 import bg.nbu.logistics.domain.models.service.ShipmentServiceModel;
 import bg.nbu.logistics.repositories.ShipmentRepository;
@@ -75,6 +76,11 @@ public class ShipmentServiceImpl implements ShipmentService {
     @Override
     public void delete(final long id) {
         shipmentRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ShipmentServiceModel> findAllShipmentsByTimePeriod(LocalDate from, LocalDate to) {
+        return mapper.mapCollection(shipmentRepository.findBySendDateBetween(from, to), ShipmentServiceModel.class);
     }
 
     private double calculatePrice(Optional<OfficeServiceModel> office, Shipment shipment) {

@@ -6,10 +6,11 @@ import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static java.util.stream.Collectors.toUnmodifiableList;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
-import bg.nbu.logistics.domain.entities.Role;
-import bg.nbu.logistics.domain.models.service.RoleServiceModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +18,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import bg.nbu.logistics.domain.entities.Role;
 import bg.nbu.logistics.domain.entities.User;
+import bg.nbu.logistics.domain.models.service.RoleServiceModel;
 import bg.nbu.logistics.domain.models.service.UserServiceModel;
 import bg.nbu.logistics.repositories.UserRepository;
 import bg.nbu.logistics.services.roles.RoleService;

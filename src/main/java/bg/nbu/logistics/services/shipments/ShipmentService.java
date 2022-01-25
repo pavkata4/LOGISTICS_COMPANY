@@ -1,5 +1,6 @@
 package bg.nbu.logistics.services.shipments;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import bg.nbu.logistics.domain.entities.Shipment;
@@ -19,4 +20,6 @@ public interface ShipmentService {
     Shipment createShipment(Shipment shipment);
 
     Shipment updateExistingShipment(Shipment shipment);
+
+    List<ShipmentServiceModel> findAllShipmentsByTimePeriod(LocalDate from, LocalDate to);
 }
