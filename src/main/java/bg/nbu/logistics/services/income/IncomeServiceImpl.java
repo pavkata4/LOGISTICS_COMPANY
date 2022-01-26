@@ -1,7 +1,8 @@
 package bg.nbu.logistics.services.income;
 
+import static java.util.stream.Collectors.summingDouble;
+
 import java.time.LocalDate;
-import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,16 +27,7 @@ public class IncomeServiceImpl implements IncomeService {
 
         return shipmentService.findAllShipmentsByTimePeriod(from, to)
                 .stream()
-                .filter(isShipmentSendBetweenDates(from, to))
                 .map(ShipmentServiceModel::getPrice)
-                .mapToDouble(price -> price)
-                .sum();
-    }
-
-    private Predicate<ShipmentServiceModel> isShipmentSendBetweenDates(LocalDate from, LocalDate to) {
-        return shipment -> shipment.getSendDate()
-                .isAfter(from)
-                && shipment.getSendDate()
-                        .isBefore(to);
+                .collect(summingDouble(price -> price));
     }
 }

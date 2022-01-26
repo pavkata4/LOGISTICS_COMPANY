@@ -1,15 +1,18 @@
 package bg.nbu.logistics.services.shipments;
 
 import static bg.nbu.logistics.services.shipments.ShipmentServiceImpl.PERSONAL_ADDRESS_PRICE_MULTIPLIER;
+import static java.time.LocalDate.now;
 import static java.util.Collections.singletonList;
 import static java.util.Optional.of;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +31,8 @@ import bg.nbu.logistics.services.offices.OfficeService;
 
 @ExtendWith(MockitoExtension.class)
 class ShipmentServiceImplTest {
+    private static final LocalDate PERIOD_START_DATE = now();
+    private static final LocalDate PERIOD_END_DATE = PERIOD_START_DATE.plusDays(5);
     private static final int WEIGHT = 10;
     private static final String ADDRESS = "address";
     private static final String USERNAME = "username";
@@ -50,22 +55,25 @@ class ShipmentServiceImplTest {
 
     @Mock
     private OfficeService officeServiceMock;
-    
+
     @Mock
     private OfficeServiceModel officeServiceModelMock;
-    
+
     @BeforeEach
     public void setUp() {
-        lenient().when(shipmentMock.getAddress()).thenReturn(ADDRESS);
-        lenient().when(shipmentMock.getWeight()).thenReturn(WEIGHT);
-        lenient().when(shipmentRepositoryMock.saveAndFlush(shipmentMock)).thenReturn(shipmentMock);
-        
+        lenient().when(shipmentMock.getAddress())
+                .thenReturn(ADDRESS);
+        lenient().when(shipmentMock.getWeight())
+                .thenReturn(WEIGHT);
+        lenient().when(shipmentRepositoryMock.saveAndFlush(shipmentMock))
+                .thenReturn(shipmentMock);
+        lenient().when(mapperMock.mapCollection(singletonList(shipmentMock), ShipmentServiceModel.class))
+                .thenReturn(singletonList(shipmentServiceModelMock));
     }
+
     @Test
     void testFindAllShipments() {
         when(shipmentRepositoryMock.findAll()).thenReturn(singletonList(shipmentMock));
-        when(mapperMock.mapCollection(singletonList(shipmentMock), ShipmentServiceModel.class))
-                .thenReturn(singletonList(shipmentServiceModelMock));
 
         assertThat(shipmentService.findAllShipments(), contains(shipmentServiceModelMock));
     }
@@ -73,8 +81,6 @@ class ShipmentServiceImplTest {
     @Test
     void testFindAllReceivedShipmentsByUsername() {
         when(shipmentRepositoryMock.findAllByRecipient(USERNAME)).thenReturn(singletonList(shipmentMock));
-        when(mapperMock.mapCollection(singletonList(shipmentMock), ShipmentServiceModel.class))
-                .thenReturn(singletonList(shipmentServiceModelMock));
 
         assertThat(shipmentService.findAllReceivedShipmentsByUsername(USERNAME), contains(shipmentServiceModelMock));
     }
@@ -82,8 +88,6 @@ class ShipmentServiceImplTest {
     @Test
     void testFindAllSentShipmentsByUsername() {
         when(shipmentRepositoryMock.findAllBySender(USERNAME)).thenReturn(singletonList(shipmentMock));
-        when(mapperMock.mapCollection(singletonList(shipmentMock), ShipmentServiceModel.class))
-                .thenReturn(singletonList(shipmentServiceModelMock));
 
         assertThat(shipmentService.findAllSentShipmentsByUsername(USERNAME), contains(shipmentServiceModelMock));
     }
@@ -94,7 +98,7 @@ class ShipmentServiceImplTest {
 
         verify(shipmentRepositoryMock).deleteById(ID);
     }
-    
+
     @Test
     void testCreateShipmentToOffice() {
         when(officeServiceMock.findOfficeByAddress(ADDRESS)).thenReturn(of(officeServiceModelMock));
@@ -104,7 +108,7 @@ class ShipmentServiceImplTest {
         verify(shipmentMock).setPrice(WEIGHT);
         verify(shipmentRepositoryMock).saveAndFlush(shipmentMock);
     }
-    
+
     @Test
     void testCreateNewShipmentToPersonalAddress() {
         when(officeServiceMock.findOfficeByAddress(ADDRESS)).thenReturn(Optional.<OfficeServiceModel>empty());
@@ -113,5 +117,15 @@ class ShipmentServiceImplTest {
 
         verify(shipmentMock).setPrice(WEIGHT * PERSONAL_ADDRESS_PRICE_MULTIPLIER);
         verify(shipmentRepositoryMock).saveAndFlush(shipmentMock);
+    }
+
+    @Test
+    void testFindAllShipmentsByTimePeriod() {
+        when(shipmentRepositoryMock.findBySendDateBetween(any(LocalDate.class), any(LocalDate.class)))
+                .thenReturn(singletonList(shipmentMock));
+        assertThat(shipmentService.findAllShipmentsByTimePeriod(PERIOD_START_DATE, PERIOD_END_DATE),
+                contains(shipmentServiceModelMock));
+
+        verify(shipmentRepositoryMock).findBySendDateBetween(PERIOD_START_DATE, PERIOD_END_DATE);
     }
 }

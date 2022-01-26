@@ -8,6 +8,7 @@ import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.MY_
 import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.RECEIVED_SHIPMENT_VIEW_MODELS;
 import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.SENT_SHIPMENT_VIEW_MODELS;
 import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.SHIPMENT_VIEW_MODELS;
+import static java.time.LocalDate.now;
 import static java.util.Collections.singleton;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.equalTo;
@@ -19,6 +20,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,6 +51,7 @@ import bg.nbu.logistics.services.users.UserService;
 @AutoConfigureTestDatabase(connection = H2)
 @DirtiesContext(classMode = AFTER_EACH_TEST_METHOD)
 class ShipmentControllerTest {
+    private static final LocalDate SEND_DATE = now();
     private static final double PRICE = 30;
     private static final String SENDER = "sender";
     private static final String RECIPIENT = "recipient";
@@ -74,8 +78,8 @@ class ShipmentControllerTest {
 
     @BeforeEach
     void setUp() {
-        shipmentRepository.saveAndFlush(new Shipment(SENDER, RECIPIENT, ADDRESS, WEIGHT, PRICE));
-        shipmentRepository.saveAndFlush(new Shipment(RECIPIENT, SENDER, ADDRESS, WEIGHT, PRICE));
+        shipmentRepository.saveAndFlush(new Shipment(SENDER, RECIPIENT, ADDRESS, WEIGHT, PRICE, SEND_DATE));
+        shipmentRepository.saveAndFlush(new Shipment(RECIPIENT, SENDER, ADDRESS, WEIGHT, PRICE, SEND_DATE));
     }
 
     @Test
