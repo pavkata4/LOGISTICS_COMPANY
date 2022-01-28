@@ -11,5 +11,6 @@ public final class UserViewConstants {
     public static final String LOGIN = "login";
     
     public static final String USER_LIST_VIEW_MODELS = "userListViewModels";
+    public static final String EMPLOYEE_LIST_VIEW_MODELS = "employeeListViewModels";
     public static final String USER_REGISTER_BINDING_MODEL = "userRegisterBindingModel";
 }

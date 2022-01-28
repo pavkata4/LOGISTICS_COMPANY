@@ -1,11 +1,12 @@
 package bg.nbu.logistics.services.users;
 
 import static bg.nbu.logistics.commons.constants.AuthorizationConstants.UNABLE_TO_FIND_USER_BY_NAME_MESSAGE;
-import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_USER;
+import static bg.nbu.logistics.commons.constants.RoleConstants.*;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static java.util.stream.Collectors.toUnmodifiableList;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -63,9 +64,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserServiceModel> findAll() {
-        return userRepository.findAll()
-                .stream()
+    public List<UserServiceModel> findAllUsers() {
+        List<User> list = new ArrayList<>();
+        for (User user : userRepository.findAll()) {
+            for (Role role : user.getAuthorities()) {
+                if (role.getAuthority()
+                        .equals(ROLE_USER)) {
+                    list.add(user);
+                    break;
+                }
+            }
+        }
+        return list.stream()
+                .map(user -> modelMapper.map(user, UserServiceModel.class))
+                .collect(toUnmodifiableList());
+    }
+
+    @Override
+    public List<UserServiceModel> findAllEmployees() {
+        List<User> list = new ArrayList<>();
+        for (User user : userRepository.findAll()) {
+            for (Role role : user.getAuthorities()) {
+                if (role.getAuthority()
+                        .equals(ROLE_EMPLOYEE)
+                        || role.getAuthority()
+                                .equals(ROLE_COURIER)) {
+                    list.add(user);
+                    break;
+                }
+            }
+        }
+        return list.stream()
                 .map(user -> modelMapper.map(user, UserServiceModel.class))
                 .collect(toUnmodifiableList());
     }

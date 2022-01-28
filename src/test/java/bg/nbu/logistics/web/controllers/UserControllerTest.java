@@ -6,6 +6,7 @@ import static bg.nbu.logistics.commons.constants.paths.UserPathParamConstants.LO
 import static bg.nbu.logistics.commons.constants.paths.UserPathParamConstants.REGISTER_PATH;
 import static bg.nbu.logistics.commons.constants.paths.UserPathParamConstants.USERS;
 import static bg.nbu.logistics.commons.constants.views.UserViewConstants.ALL_USERS;
+import static bg.nbu.logistics.commons.constants.views.UserViewConstants.EMPLOYEE_LIST_VIEW_MODELS;
 import static bg.nbu.logistics.commons.constants.views.UserViewConstants.LOGIN;
 import static bg.nbu.logistics.commons.constants.views.UserViewConstants.REGISTRATION;
 import static bg.nbu.logistics.commons.constants.views.UserViewConstants.USER_LIST_VIEW_MODELS;
@@ -74,10 +75,12 @@ class UserControllerTest {
     void testFetchAll() throws Exception {
         mockMvc.perform(get(uriBuilder.pathSegment(USERS)
                 .build()))
-                .andExpect(model().attribute(USER_LIST_VIEW_MODELS, hasItem(hasProperty(USERNAME, equalTo(USERNAME)))))
+                .andExpectAll(
+                        model().attribute(USER_LIST_VIEW_MODELS, hasItem(hasProperty(USERNAME, equalTo(USERNAME)))),
+                        model().attribute(EMPLOYEE_LIST_VIEW_MODELS, hasItem(hasProperty(USERNAME, equalTo(USERNAME)))))
                 .andExpect(view().name(ALL_USERS));
     }
-
+    
     @Test
     void testRegister() throws Exception {
         mockMvc.perform(get(uriBuilder.pathSegment(USERS, REGISTER_PATH)

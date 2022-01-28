@@ -1,7 +1,11 @@
 package bg.nbu.logistics.services.users;
 
+import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_COURIER;
+import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_EMPLOYEE;
+import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_ROOT;
 import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_USER;
 import static java.util.Collections.emptyList;
+import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
@@ -27,6 +31,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import bg.nbu.logistics.domain.entities.Role;
 import bg.nbu.logistics.domain.entities.User;
 import bg.nbu.logistics.domain.models.service.RoleServiceModel;
 import bg.nbu.logistics.domain.models.service.UserServiceModel;
@@ -82,6 +87,8 @@ class UserServiceImplTest {
                 .thenReturn(ENCODED_PASSWORD);
         lenient().when(userRepositoryMock.saveAndFlush(userMock))
                 .thenReturn(userMock);
+        lenient().when(userRepositoryMock.findAll())
+                .thenReturn(singletonList(userMock));
     }
 
     @Test
@@ -117,17 +124,52 @@ class UserServiceImplTest {
     }
 
     @Test
-    void testFindAllNoUsersPresent() {
-        when(userRepositoryMock.findAll()).thenReturn(emptyList());
+    void testFindAllUsers() {
+        when(userMock.getAuthorities()).thenReturn(singleton(new Role(ROLE_USER)));
 
-        assertThat(userService.findAll(), Matchers.empty());
+        assertThat(userService.findAllUsers(), contains(userServiceModelMock));
     }
 
     @Test
-    void testFindAll() {
-        when(userRepositoryMock.findAll()).thenReturn(singletonList(userMock));
+    void testFindAllUsersReturnsEmptyCollectionWhenNotUsersFound() {
+        when(userRepositoryMock.findAll()).thenReturn(emptyList());
 
-        assertThat(userService.findAll(), contains(userServiceModelMock));
+        assertThat(userService.findAllUsers(), Matchers.<UserServiceModel>empty());
+    }
+
+    @Test
+    void testFindAllUsersReturnsEmptyCollectionWhenNotUserRole() {
+        when(userMock.getAuthorities()).thenReturn(singleton(new Role(ROLE_ROOT)));
+
+        assertThat(userService.findAllUsers(), Matchers.<UserServiceModel>empty());
+    }
+
+    @Test
+    void testFindAllEmployeesWhenEmployeeRole() {
+        when(userMock.getAuthorities()).thenReturn(singleton(new Role(ROLE_EMPLOYEE)));
+
+        assertThat(userService.findAllEmployees(), contains(userServiceModelMock));
+    }
+
+    @Test
+    void testFindAllEmployeesWhenCourierRole() {
+        when(userMock.getAuthorities()).thenReturn(singleton(new Role(ROLE_COURIER)));
+
+        assertThat(userService.findAllEmployees(), contains(userServiceModelMock));
+    }
+
+    @Test
+    void testFindAllEmployeesReturnsEmptyCollectionWhenNotUsersFound() {
+        when(userRepositoryMock.findAll()).thenReturn(emptyList());
+
+        assertThat(userService.findAllEmployees(), Matchers.<UserServiceModel>empty());
+    }
+
+    @Test
+    void testFindAllEmployeesWhenNotEmployeeRole() {
+        when(userMock.getAuthorities()).thenReturn(singleton(new Role(ROLE_ROOT)));
+
+        assertThat(userService.findAllEmployees(), Matchers.<UserServiceModel>empty());
     }
 
     @Test

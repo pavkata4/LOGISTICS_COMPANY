@@ -10,7 +10,9 @@ import bg.nbu.logistics.domain.models.service.UserServiceModel;
 public interface UserService extends UserDetailsService {
     UserServiceModel register(UserServiceModel userServiceModel);
 
-    List<UserServiceModel> findAll();
+    List<UserServiceModel> findAllUsers();
+
+    List<UserServiceModel> findAllEmployees();
 
     UserServiceModel findById(long id);
 

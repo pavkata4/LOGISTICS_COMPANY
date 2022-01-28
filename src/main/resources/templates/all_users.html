@@ -47,6 +47,34 @@
                 </tbody>
             </table>
         </div>
+        <br>
+        <br>
+        <div class="box-1">
+            <div class="box-headline"><h2>Служители</h2></div>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Име</th>
+                    <th>Роля</th>
+                    <th>Операции</th>
+                </tr>
+                <tbody>
+                <th:block th:each="user : ${employeeListViewModels}" th:object="${user}">
+                    <tr>
+                        <td th:text="*{id}"></td>
+                        <td th:text="*{username}"></td>
+                        <td th:text="*{authorities}"></td>
+                        <td>
+                            <button class="roundButton editButton">Редактиране</button>
+                            <a th:href="@{'/users/' + ${user.id} + '/delete'}">
+                                <button class="roundButton deleteButton">Изтрий</button>
+                            </a>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
     </div>
     <th:block th:include="~{fragments/footer}"></th:block>
 </div>

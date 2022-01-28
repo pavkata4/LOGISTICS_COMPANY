@@ -6,6 +6,7 @@ import static bg.nbu.logistics.commons.constants.paths.UserPathParamConstants.LO
 import static bg.nbu.logistics.commons.constants.paths.UserPathParamConstants.REGISTER_PATH;
 import static bg.nbu.logistics.commons.constants.paths.UserPathParamConstants.USERS;
 import static bg.nbu.logistics.commons.constants.views.UserViewConstants.ALL_USERS;
+import static bg.nbu.logistics.commons.constants.views.UserViewConstants.EMPLOYEE_LIST_VIEW_MODELS;
 import static bg.nbu.logistics.commons.constants.views.UserViewConstants.LOGIN;
 import static bg.nbu.logistics.commons.constants.views.UserViewConstants.REGISTRATION;
 import static bg.nbu.logistics.commons.constants.views.UserViewConstants.USER_LIST_VIEW_MODELS;
@@ -83,12 +84,18 @@ public class UserController extends BaseController {
 
     @GetMapping
     @PreAuthorize(IS_AUTHENTICATED)
-    public ModelAndView fetchAll(ModelAndView modelAndView) {
-        final List<UserViewModel> userViewModels = userService.findAll()
+    public ModelAndView fetchUsers(ModelAndView modelAndView) {
+        final List<UserViewModel> userViewModels = userService.findAllUsers()
                 .stream()
                 .map(user -> modelMapper.map(user, UserViewModel.class))
                 .collect(toUnmodifiableList());
+        final List<UserViewModel> employeeViewModels = userService.findAllEmployees()
+                .stream()
+                .map(user -> modelMapper.map(user, UserViewModel.class))
+                .collect(toUnmodifiableList());
+
         modelAndView.addObject(USER_LIST_VIEW_MODELS, userViewModels);
+        modelAndView.addObject(EMPLOYEE_LIST_VIEW_MODELS, employeeViewModels);
 
         return view(ALL_USERS, modelAndView);
     }
