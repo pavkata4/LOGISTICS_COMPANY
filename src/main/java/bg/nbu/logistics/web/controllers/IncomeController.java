@@ -35,8 +35,7 @@ public class IncomeController extends BaseController {
     public ModelAndView fetchIncomeInRange(
             @RequestParam(name = "fromDate") @DateTimeFormat(iso = DATE) LocalDate fromDate,
             @RequestParam(name = "toDate") @DateTimeFormat(iso = DATE) LocalDate toDate, ModelAndView modelAndView) {
-        final double income = incomeService.getIncomeByTimePeriod(fromDate, toDate);
-        modelAndView.addObject(INCOME_VIEW_MODEL, income);
+        modelAndView.addObject(INCOME_VIEW_MODEL, incomeService.getIncomeByTimePeriod(fromDate, toDate));
         return view(INCOME, modelAndView);
     }
 

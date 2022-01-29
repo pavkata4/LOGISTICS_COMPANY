@@ -13,10 +13,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 
@@ -64,6 +66,9 @@ class UserServiceImplTest {
     private User userMock;
 
     @Mock
+    private Role roleMock;
+
+    @Mock
     private UserServiceModel userServiceModelMock;
 
     @Mock
@@ -77,6 +82,8 @@ class UserServiceImplTest {
                 .thenReturn(userServiceModelMock);
         lenient().when(modelMapperMock.map(userServiceModelMock, User.class))
                 .thenReturn(userMock);
+        lenient().when(modelMapperMock.map(roleServiceModelMock, Role.class))
+                .thenReturn(roleMock);
         lenient().when(roleServiceMock.findAllRoles())
                 .thenReturn(Set.of(roleServiceModelMock));
         lenient().when(userRepositoryMock.count())
@@ -89,6 +96,10 @@ class UserServiceImplTest {
                 .thenReturn(userMock);
         lenient().when(userRepositoryMock.findAll())
                 .thenReturn(singletonList(userMock));
+        lenient().when(userRepositoryMock.findById(ID))
+                .thenReturn(of(userMock));
+        lenient().when(roleServiceMock.findByAuthority(anyString()))
+                .thenReturn(roleServiceModelMock);
     }
 
     @Test
@@ -189,5 +200,20 @@ class UserServiceImplTest {
     @Test
     void testFindByUsername() {
         assertThat(userService.findByUsername(USERNAME), equalTo(of(userServiceModelMock)));
+    }
+
+    @Test
+    void testChangeRoleByIdThrowsExceptionWhenUserNotFound() {
+        when(userRepositoryMock.findById(ID)).thenReturn(empty());
+
+        assertThrows(NoSuchElementException.class, () -> userService.changeRoleById(ID, ROLE_ROOT));
+    }
+
+    @Test
+    void testChangeRoleById() {
+        userService.changeRoleById(ID, ROLE_ROOT);
+
+        verify(userMock).setAuthorities(singleton(roleMock));
+        verify(userRepositoryMock).saveAndFlush(userMock);
     }
 }

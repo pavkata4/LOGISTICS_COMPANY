@@ -45,7 +45,7 @@ public class OfficeServiceImpl implements OfficeService {
             return;
         }
 
-        Optional<Office> office = officeRepository.findById(officeId);
+        final Optional<Office> office = officeRepository.findById(officeId);
         if (!office.isPresent()) {
             log.error(OFFICE_NOT_FOUND_ERROR_TEMPLATE, officeId, userServiceModel.getUsername());
                     return;

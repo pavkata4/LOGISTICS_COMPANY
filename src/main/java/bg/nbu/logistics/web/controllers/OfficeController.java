@@ -2,6 +2,12 @@ package bg.nbu.logistics.web.controllers;
 
 import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
 import static bg.nbu.logistics.commons.constants.AuthorizationConstants.UNABLE_TO_FIND_USER_BY_NAME_MESSAGE;
+import static bg.nbu.logistics.commons.constants.paths.OfficePathParamConstants.MANAGER;
+import static bg.nbu.logistics.commons.constants.paths.OfficePathParamConstants.OFFICES;
+import static bg.nbu.logistics.commons.constants.views.OfficeViewConstants.ADD_OFFICE;
+import static bg.nbu.logistics.commons.constants.views.OfficeViewConstants.ALL_OFFICES;
+import static bg.nbu.logistics.commons.constants.views.OfficeViewConstants.OFFICE_LIST_VIEW_MODELS;
+import static bg.nbu.logistics.commons.constants.views.OfficeViewConstants.OFFICE_VIEW_MODEL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,11 +28,8 @@ import bg.nbu.logistics.services.offices.OfficeService;
 import bg.nbu.logistics.services.users.UserService;
 
 @Controller
-@RequestMapping("/offices")
+@RequestMapping(OFFICES)
 public class OfficeController extends BaseController {
-    private static final String OFFICE_LIST_VIEW_MODELS = "officeListViewModels";
-    private static final String ALL_OFFICES = "all_offices";
-
     private final OfficeService officeService;
     private final UserService userService;
     private final Mapper mapper;
@@ -47,11 +50,11 @@ public class OfficeController extends BaseController {
         return view(ALL_OFFICES, modelAndView);
     }
 
-    @GetMapping("/manager")
+    @GetMapping(MANAGER)
     @PreAuthorize(IS_AUTHENTICATED)
     public ModelAndView addOffice(ModelAndView modelAndView, @ModelAttribute(name = "office") Office office) {
-        modelAndView.addObject("office", office);
-        return view("add_office");
+        modelAndView.addObject(OFFICE_VIEW_MODEL, office);
+        return view(ADD_OFFICE);
     }
 
     @PostMapping

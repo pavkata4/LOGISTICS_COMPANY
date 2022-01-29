@@ -10,13 +10,13 @@ function openMenu() {
 function calculatePrice() {
     var weight = document.getElementById("weight").value;
     if (weight == 0 || weight == "") {
-        alert("Can't calculate the price because weight is empty.");
+        alert("Не може да се изчисля цената поради невалидно тегло на пратката.");
     } else if (isNaN(weight)) {
-        alert("The entered value in weight field is not a number.")
+        alert("Въведената стойност за тегло не е число.")
     } else {
         alert(
-            "The price of shipping to office will be " + (weight) + ".\r\n"
-            + "The price of shipping to address will be " + (1.5 * weight) + "."
+            "Цената за доставка до офиса е: " + (weight) + ".\r\n"
+            + "Цената за доставка до адрес е: " + (1.5 * weight) + "."
         );
     }
 }

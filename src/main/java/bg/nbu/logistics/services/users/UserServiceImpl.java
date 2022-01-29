@@ -128,8 +128,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changeRoleById(long id, String authority) {
-        User user = userRepository.findById(id).orElseThrow();
-        Set<Role> roles = new HashSet<>();
+        final User user = userRepository.findById(id).orElseThrow();
+        final Set<Role> roles = new HashSet<>();
         roles.add(modelMapper.map(roleService.findByAuthority(ROLE_EMPLOYEE), Role.class));
         user.setAuthorities(roles);
         userRepository.saveAndFlush(user);
