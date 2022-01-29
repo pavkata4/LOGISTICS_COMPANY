@@ -27,7 +27,7 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @ManyToMany(targetEntity = Role.class, fetch = EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Role.class, fetch = EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> authorities = emptySet();
 
