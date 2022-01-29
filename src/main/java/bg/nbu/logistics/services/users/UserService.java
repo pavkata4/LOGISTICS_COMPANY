@@ -16,7 +16,9 @@ public interface UserService extends UserDetailsService {
 
     UserServiceModel findById(long id);
 
-    void delete(long id);
-
     Optional<UserServiceModel> findByUsername(String username);
+
+    void changeRoleById(long id, String authority);
+
+    void delete(long id);
 }

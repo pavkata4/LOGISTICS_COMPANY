@@ -2,7 +2,10 @@ package bg.nbu.logistics.web.controllers;
 
 import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
 import static bg.nbu.logistics.commons.constants.AuthorizationConstants.UNABLE_TO_FIND_USER_BY_NAME_MESSAGE;
+import static bg.nbu.logistics.commons.constants.paths.ShipmentPathParamConstants.SHIPMENTS;
 
+import bg.nbu.logistics.domain.entities.User;
+import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,6 +19,8 @@ import bg.nbu.logistics.domain.models.service.UserServiceModel;
 import bg.nbu.logistics.domain.models.view.OfficeViewModel;
 import bg.nbu.logistics.services.offices.OfficeService;
 import bg.nbu.logistics.services.users.UserService;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/offices")
@@ -45,30 +50,39 @@ public class OfficeController extends BaseController {
 
     @GetMapping("/manager")
     @PreAuthorize(IS_AUTHENTICATED)
-    public ModelAndView add(ModelAndView modelAndView, @ModelAttribute(name = "office") Office office) {
+    public ModelAndView addOffice(ModelAndView modelAndView, @ModelAttribute(name = "office") Office office) {
         modelAndView.addObject("office", office);
         return view("add_office");
     }
 
     @PostMapping
     @PreAuthorize(IS_AUTHENTICATED)
-    public ModelAndView addOffice( @ModelAttribute(name = "office") Office office) {
+    public ModelAndView postOffice(@ModelAttribute(name = "office") Office office) {
         officeService.createOffice(office);
 
         return redirect("/offices");
     }
 
-    @PostMapping("/{id}/staffing/{employeeName}")
+    @GetMapping("/{id}/add-employee")
     @PreAuthorize(IS_AUTHENTICATED)
-    public ModelAndView addEmployee(@PathVariable(name = "id") long id,
-            @PathVariable(name = "employeeName") String employeeName) {
+    public ModelAndView addEmployee(ModelAndView modelAndView, @ModelAttribute(name = "user") UserServiceModel userServiceModel, @PathVariable("id") long id) {
+        modelAndView.addObject("user", userServiceModel);
+        modelAndView.addObject("id", id);
+        return view("add_employee");
+    }
 
-        final UserServiceModel userServiceModel = userService.findByUsername(employeeName)
+    @PostMapping("/{id}/staffing")
+    @PreAuthorize(IS_AUTHENTICATED)
+    public ModelAndView postEmployee(ModelAndView modelAndView, @PathVariable(name = "id") long id,
+            @ModelAttribute(name = "user") UserServiceModel userServiceModel) {
+
+        final UserServiceModel userServiceModelByUsername = userService.findByUsername(userServiceModel.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException(UNABLE_TO_FIND_USER_BY_NAME_MESSAGE));
 
-        officeService.addEmployee(id, userServiceModel);
+        officeService.addEmployee(id, userServiceModelByUsername);
 
-        return view("TO BE IMPLEMENTED");
+        modelAndView.setViewName("redirect:" + "/offices");
+        return modelAndView;
     }
 
     @RequestMapping(value="/{id}/delete")

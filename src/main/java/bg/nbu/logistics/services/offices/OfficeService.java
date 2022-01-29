@@ -15,6 +15,8 @@ public interface OfficeService {
     List<OfficeServiceModel> getOffices();
 
     void removeOffice(long id);
+
+    Optional<OfficeServiceModel> findOfficeById(long id);
     
     Optional<OfficeServiceModel> findOfficeByAddress(String address);
 }

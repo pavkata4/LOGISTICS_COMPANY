@@ -3,10 +3,14 @@ package bg.nbu.logistics.domain.models.service;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import bg.nbu.logistics.domain.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -16,4 +20,5 @@ public class OfficeServiceModel extends BaseServiceModel {
     @NotEmpty
     @NotNull
     private String address;
+    private Set<User> employees = new HashSet<>();
 }

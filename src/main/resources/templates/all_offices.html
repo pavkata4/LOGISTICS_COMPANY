@@ -33,16 +33,23 @@
                 <tr>
                     <th>ID</th>
                     <th>Адрес</th>
+                    <th>Служители</th>
                     <th>Операции</th>
                 </tr>
                 <tbody>
                 <th:block th:each="office : ${officeListViewModels}"
                           th:object="${office}">
                     <tr>
-                        <td th:text="*{id}"></td>
-                        <td th:text="*{address}"></td>
+                        <td th:text="${office.id}"></td>
+                        <td th:text="${office.address}"></td>
+                        <td th:text="${office.employees}"></td>
                         <td>
-                            <button class="roundButton editButton">Редактиране</button>
+                            <a th:href="@{'/offices/' + ${office.id} + '/add-employee'}">
+                                <button class="roundButton viewButton roundFormWithBlackText borderButton">Добави служител</button>
+                            </a>
+                            <a th:href="@{'/offices/' + ${office.id} + '/update'}">
+                                <button class="roundButton editButton">Редактиране</button>
+                            </a>
                             <a th:href="@{'/offices/' + ${office.id} + '/delete'}">
                                 <button class="roundButton deleteButton">Изтрий</button>
                             </a>

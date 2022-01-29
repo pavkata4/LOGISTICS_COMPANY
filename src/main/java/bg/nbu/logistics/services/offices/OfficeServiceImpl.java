@@ -1,12 +1,13 @@
 package bg.nbu.logistics.services.offices;
 
+import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_COURIER;
 import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_EMPLOYEE;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+import bg.nbu.logistics.services.users.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,25 +28,36 @@ public class OfficeServiceImpl implements OfficeService {
 
     private final ModelMapper modelMapper;
     private final OfficeRepository officeRepository;
+    private final UserService userService;
     private final Mapper mapper;
     
     @Autowired
-    public OfficeServiceImpl(ModelMapper modelMapper, OfficeRepository officeRepository, Mapper mapper) {
+    public OfficeServiceImpl(ModelMapper modelMapper, OfficeRepository officeRepository, UserService userService, Mapper mapper) {
         this.modelMapper = modelMapper;
         this.officeRepository = officeRepository;
+        this.userService = userService;
         this.mapper = mapper;
     }
 
     @Override
     public void addEmployee(long officeId, UserServiceModel userServiceModel) {
-        if (!isUserAnEmployee(userServiceModel)) {
+        if (isUserAnEmployee(userServiceModel)) {
             return;
         }
 
-        officeRepository.findById(officeId)
-                .map(Office::getEmployees)
-                .ifPresentOrElse(employees -> employees.add(modelMapper.map(userServiceModel, User.class)),
-                        () -> log.error(OFFICE_NOT_FOUND_ERROR_TEMPLATE, officeId, userServiceModel.getUsername()));
+        Optional<Office> office = officeRepository.findById(officeId);
+        if (!office.isPresent()) {
+            log.error(OFFICE_NOT_FOUND_ERROR_TEMPLATE, officeId, userServiceModel.getUsername());
+                    return;
+        }
+
+        userService.changeRoleById(userServiceModel.getId(), ROLE_EMPLOYEE);
+
+
+        Set<User> usersInOffice = office.get().getEmployees();
+        usersInOffice.add((modelMapper.map(userServiceModel, User.class)));
+        office.get().setEmployees(usersInOffice);
+        officeRepository.saveAndFlush(office.get());
     }
 
     @Override
@@ -64,6 +76,16 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
+    public Optional<OfficeServiceModel> findOfficeById(long id) {
+        final Optional<Office> office = officeRepository.findById(id);
+        if (office.isEmpty()) {
+            return empty();
+        }
+
+        return of(modelMapper.map(office.get(), OfficeServiceModel.class));
+    }
+
+    @Override
     public Optional<OfficeServiceModel> findOfficeByAddress(String address) {
         final Optional<Office> office = officeRepository.findByAddress(address);
         if (office.isEmpty()) {
@@ -77,6 +99,6 @@ public class OfficeServiceImpl implements OfficeService {
         return userServiceModel.getAuthorities()
                 .stream()
                 .map(RoleServiceModel::getAuthority)
-                .anyMatch(role -> role.equals(ROLE_EMPLOYEE) || role.equals(ROLE_EMPLOYEE));
+                .anyMatch(role -> role.equals(ROLE_EMPLOYEE) || role.equals(ROLE_COURIER));
     }
 }

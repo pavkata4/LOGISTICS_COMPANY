@@ -1,7 +1,9 @@
 package bg.nbu.logistics.services.users;
 
 import static bg.nbu.logistics.commons.constants.AuthorizationConstants.UNABLE_TO_FIND_USER_BY_NAME_MESSAGE;
-import static bg.nbu.logistics.commons.constants.RoleConstants.*;
+import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_EMPLOYEE;
+import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_USER;
+import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_COURIER;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static java.util.stream.Collectors.toUnmodifiableList;
@@ -118,14 +120,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(long id) {
-        userRepository.deleteById(id);
-    }
-
-    @Override
     public Optional<UserServiceModel> findByUsername(String username) {
         final Optional<User> user = userRepository.findByUsername(username);
 
         return user.isPresent() ? of(modelMapper.map(user.get(), UserServiceModel.class)) : empty();
     }
+
+    @Override
+    public void changeRoleById(long id, String authority) {
+        User user = userRepository.findById(id).orElseThrow();
+        Set<Role> roles = new HashSet<>();
+        roles.add(modelMapper.map(roleService.findByAuthority(ROLE_EMPLOYEE), Role.class));
+        user.setAuthorities(roles);
+        userRepository.saveAndFlush(user);
+    }
+
+    @Override
+    public void delete(long id) {
+        userRepository.deleteById(id);
+    }
+
 }
