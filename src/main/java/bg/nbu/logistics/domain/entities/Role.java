@@ -1,6 +1,8 @@
 package bg.nbu.logistics.domain.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -8,11 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import static java.util.Collections.emptySet;
 
 @Getter
 @Setter

@@ -2,15 +2,16 @@ package bg.nbu.logistics.web.controllers;
 
 import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
 import static bg.nbu.logistics.commons.constants.AuthorizationConstants.UNABLE_TO_FIND_USER_BY_NAME_MESSAGE;
-import static bg.nbu.logistics.commons.constants.paths.ShipmentPathParamConstants.SHIPMENTS;
 
-import bg.nbu.logistics.domain.entities.User;
-import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import bg.nbu.logistics.commons.utils.Mapper;
@@ -19,8 +20,6 @@ import bg.nbu.logistics.domain.models.service.UserServiceModel;
 import bg.nbu.logistics.domain.models.view.OfficeViewModel;
 import bg.nbu.logistics.services.offices.OfficeService;
 import bg.nbu.logistics.services.users.UserService;
-
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/offices")

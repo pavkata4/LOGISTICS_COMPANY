@@ -1,20 +1,27 @@
 package bg.nbu.logistics.web.controllers;
 
 import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
+import static bg.nbu.logistics.commons.constants.paths.IncomePathParamConstants.INCOME_PATH;
+import static bg.nbu.logistics.commons.constants.paths.IncomePathParamConstants.IN_RANGE;
+import static bg.nbu.logistics.commons.constants.views.IncomeViewConstants.INCOME;
+import static bg.nbu.logistics.commons.constants.views.IncomeViewConstants.INCOME_VIEW_MODEL;
+import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
 
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import bg.nbu.logistics.services.income.IncomeService;
 
 @Controller
-@RequestMapping("income")
+@RequestMapping(INCOME_PATH)
 public class IncomeController extends BaseController {
     private final IncomeService incomeService;
 
@@ -23,15 +30,19 @@ public class IncomeController extends BaseController {
         this.incomeService = incomeService;
     }
 
+    @GetMapping(IN_RANGE)
+    @PreAuthorize(IS_AUTHENTICATED)
+    public ModelAndView fetchIncomeInRange(
+            @RequestParam(name = "fromDate") @DateTimeFormat(iso = DATE) LocalDate fromDate,
+            @RequestParam(name = "toDate") @DateTimeFormat(iso = DATE) LocalDate toDate, ModelAndView modelAndView) {
+        final double income = incomeService.getIncomeByTimePeriod(fromDate, toDate);
+        modelAndView.addObject(INCOME_VIEW_MODEL, income);
+        return view(INCOME, modelAndView);
+    }
+
     @GetMapping
     @PreAuthorize(IS_AUTHENTICATED)
-    public ModelAndView fetchIncome(ModelAndView modelAndView) {
-        final double income = incomeService.getIncomeByTimePeriod(LocalDate.now()
-                .minusMonths(2),
-                LocalDate.now()
-                        .plusMonths(3));
-
-        modelAndView.addObject("income", income);
-        return view("income", modelAndView);
+    public ModelAndView getIncomeView(ModelAndView modelAndView) {
+        return view(INCOME);
     }
 }

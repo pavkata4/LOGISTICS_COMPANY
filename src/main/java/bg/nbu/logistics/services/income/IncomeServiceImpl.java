@@ -22,7 +22,7 @@ public class IncomeServiceImpl implements IncomeService {
     public double getIncomeByTimePeriod(LocalDate from, LocalDate to) {
         if (from.isAfter(to)) {
             throw new IllegalStateException(
-                    String.format("The prodided 'from' date: %s is after the 'to' date: %s", from, to));
+                    String.format("The provided 'from' date: %s is after the 'to' date: %s", from, to));
         }
 
         return shipmentService.findAllShipmentsByTimePeriod(from, to)
