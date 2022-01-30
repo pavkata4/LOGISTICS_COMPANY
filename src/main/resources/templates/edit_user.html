@@ -28,7 +28,12 @@
                            readonly required />
                 </div>
                 <div>
-                    <button class="roundButton roundFormWithBlackText editButton" type="submit">Добавяне</button>
+                    <input class="roundButton roundFormWithBlackText" type="text" name="username"
+                           id="username" placeholder="Username" th:field="${user.username}"
+                           required />
+                </div>
+                <div>
+                    <button class="roundButton roundFormWithBlackText editButton" type="submit">Редактиране</button>
                 </div>
             </form>
         </div>

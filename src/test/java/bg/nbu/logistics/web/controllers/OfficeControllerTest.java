@@ -74,7 +74,6 @@ class OfficeControllerTest {
                         .register(new UserServiceModel(USERNAME, PASSWORD, singleton(new RoleServiceModel(EMPLOYEE)))),
                 User.class);
 
-//        officeService.createOffice(new Office(ADDRESS, singleton(user)));
         officeService.createOffice(modelMapper.map(new Office(ADDRESS, singleton(user)), OfficeServiceModel.class));
     }
 

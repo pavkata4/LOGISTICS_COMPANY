@@ -108,8 +108,8 @@ public class UserController extends BaseController {
 
     @GetMapping("/{id}/update")
     @PreAuthorize(IS_AUTHENTICATED)
-    public ModelAndView updateUser(ModelAndView modelAndView, @PathVariable("id") long id) {
-        UserServiceModel userServiceModel = userService.findById(id);
+    public ModelAndView updateUser(ModelAndView modelAndView, @ModelAttribute("user") UserServiceModel userServiceModel, @PathVariable("id") long id) {
+        userServiceModel = userService.findById(id);
 
         modelAndView.addObject("user", userServiceModel);
         return view("edit_user");
