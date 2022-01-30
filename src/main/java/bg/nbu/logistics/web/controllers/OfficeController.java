@@ -66,8 +66,10 @@ public class OfficeController extends BaseController {
 
     @GetMapping("/{id}/update")
     @PreAuthorize(IS_AUTHENTICATED)
-    public ModelAndView updateOffice(ModelAndView modelAndView, @ModelAttribute(name = "office") OfficeServiceModel officeServiceModel, @PathVariable("id") long id) {
-        officeServiceModel = officeService.findOfficeById(id).orElseThrow();
+    public ModelAndView updateOffice(ModelAndView modelAndView,
+            @ModelAttribute(name = "office") OfficeServiceModel officeServiceModel, @PathVariable("id") long id) {
+        officeServiceModel = officeService.findOfficeById(id)
+                .orElseThrow();
 
         modelAndView.addObject("office", officeServiceModel);
         return view("edit_office");

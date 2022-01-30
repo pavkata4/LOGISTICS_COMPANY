@@ -24,7 +24,7 @@
             <form th:action="@{/users/update}" th:object="${user}" th:method="post">
                 <div>
                     <input class="roundButton roundFormWithBlackText" type="text" name="id"
-                           id="shipment_id" placeholder="ID" th:field="*{id}"
+                           id="id" placeholder="ID" th:field="${user.id}"
                            readonly required />
                 </div>
                 <div>

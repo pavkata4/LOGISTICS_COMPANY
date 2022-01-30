@@ -1,8 +1,5 @@
 package bg.nbu.logistics.services.offices;
 
-import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_COURIER;
-import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_EMPLOYEE;
-import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_ROOT;
 import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_USER;
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
@@ -10,11 +7,8 @@ import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import static org.mockito.internal.util.collections.Sets.newSet;
 
@@ -70,12 +64,6 @@ class OfficeServiceImplTest {
     @Mock
     private User userMock;
 
-    private final ModelMapper modelMapper;
-
-    OfficeServiceImplTest(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
-
     @BeforeEach
     void setUp() {
         lenient().when(mapperMock.mapCollection(singletonList(officeMock), OfficeServiceModel.class))
@@ -84,11 +72,15 @@ class OfficeServiceImplTest {
                 .thenReturn(officeServiceModelMock);
         lenient().when(modelMapperMock.map(userServiceModelMock, User.class))
                 .thenReturn(userMock);
+        lenient().when(modelMapperMock.map(officeServiceModelMock, Office.class))
+                .thenReturn(officeMock);
 
         lenient().when(officeRepositoryMock.findById(ID))
                 .thenReturn(of(officeMock));
         lenient().when(officeRepositoryMock.findByAddress(ADDRESS))
                 .thenReturn(of(officeMock));
+        lenient().when(officeRepositoryMock.saveAndFlush(officeMock))
+                .thenReturn(officeMock);
 
         lenient().when(userServiceModelMock.getAuthorities())
                 .thenReturn(singleton(roleServiceModelMock));
@@ -98,60 +90,19 @@ class OfficeServiceImplTest {
 
         lenient().when(officeMock.getEmployees())
                 .thenReturn(newSet(userMock));
-    }
-
-    @Test
-    void addEmployeeWhenUserRole() {
-        officeService.addEmployee(ID, userServiceModelMock);
-
-        verify(officeMock).setEmployees(singleton(userMock));
-        verify(officeRepositoryMock).saveAndFlush(officeMock);
-    }
-
-    @Test
-    void addEmployeeWhenRootRole() {
-        when(roleServiceModelMock.getAuthority()).thenReturn(ROLE_ROOT);
-
-        officeService.addEmployee(ID, userServiceModelMock);
-
-        verify(officeMock).setEmployees(singleton(userMock));
-        verify(officeRepositoryMock).saveAndFlush(officeMock);
-    }
-
-    @Test
-    void addEmployeeWhenCourierRole() {
-        when(roleServiceModelMock.getAuthority()).thenReturn(ROLE_COURIER);
-
-        officeService.addEmployee(ID, userServiceModelMock);
-
-        verifyNoInteractions(userServiceMock, officeRepositoryMock);
-    }
-
-    @Test
-    void addEmployeeWhenEmployeeRole() {
-        when(roleServiceModelMock.getAuthority()).thenReturn(ROLE_EMPLOYEE);
-
-        officeService.addEmployee(ID, userServiceModelMock);
-
-        verifyNoInteractions(userServiceMock, officeRepositoryMock);
-    }
-
-    @Test
-    void addEmployeeWhenOfficeNotFound() {
-        lenient().when(officeRepositoryMock.findById(ID))
-                .thenReturn(empty());
-
-        officeService.addEmployee(ID, userServiceModelMock);
-
-        verifyNoInteractions(userServiceMock);
-        verify(officeRepositoryMock, never()).saveAndFlush(any(Office.class));
+        lenient().when(officeMock.getId())
+                .thenReturn(ID);
+        lenient().when(officeMock.getAddress())
+                .thenReturn(ADDRESS);
     }
 
     @Test
     void createOffice() {
-        officeService.createOffice(modelMapper.map(officeMock, OfficeServiceModel.class));
-//        officeService.createOffice(officeMock);
+        assertThat(officeService.createOffice(officeServiceModelMock), equalTo(officeServiceModelMock));
 
+        verify(officeMock).setId(ID);
+        verify(officeMock).setAddress(ADDRESS);
+        verify(officeMock).setEmployees(singleton(userMock));
         verify(officeRepositoryMock).saveAndFlush(officeMock);
     }
 

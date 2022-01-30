@@ -17,8 +17,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import bg.nbu.logistics.domain.entities.User;
-import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -107,16 +105,6 @@ public class UserController extends BaseController {
     public void deleteUser(@PathVariable("id") long id) {
         userService.delete(id);
     }
-
-
-//    @GetMapping("/{id}/update")
-//    @PreAuthorize(IS_AUTHENTICATED)
-//    public ModelAndView updateUser(ModelAndView modelAndView, @ModelAttribute(name = "user") UserServiceModel userServiceModel, @PathVariable("id") long id) {
-//        userServiceModel = userService.findById(userServiceModel.getId());
-//
-//        modelAndView.addObject("user", userServiceModel);
-//        return view("edit_user");
-//    }
 
     @GetMapping("/{id}/update")
     @PreAuthorize(IS_AUTHENTICATED)
