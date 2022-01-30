@@ -34,6 +34,7 @@ import bg.nbu.logistics.domain.models.service.RoleServiceModel;
 import bg.nbu.logistics.domain.models.service.UserServiceModel;
 import bg.nbu.logistics.repositories.OfficeRepository;
 import bg.nbu.logistics.services.users.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @ExtendWith(MockitoExtension.class)
 class OfficeServiceImplTest {
@@ -69,6 +70,12 @@ class OfficeServiceImplTest {
 
     @Mock
     private User userMock;
+
+    private final ModelMapper modelMapper;
+
+    OfficeServiceImplTest(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 
     @BeforeEach
     void setUp() {
@@ -143,7 +150,8 @@ class OfficeServiceImplTest {
 
     @Test
     void createOffice() {
-        officeService.createOffice(officeMock);
+        officeService.createOffice(modelMapper.map(officeMock, OfficeServiceModel.class));
+//        officeService.createOffice(officeMock);
 
         verify(officeRepositoryMock).saveAndFlush(officeMock);
     }

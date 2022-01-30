@@ -17,6 +17,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -98,5 +99,29 @@ public class UserController extends BaseController {
         modelAndView.addObject(EMPLOYEE_LIST_VIEW_MODELS, employeeViewModels);
 
         return view(ALL_USERS, modelAndView);
+    }
+
+    @RequestMapping
+    @PreAuthorize(IS_AUTHENTICATED)
+    public void deleteUser(@PathVariable("id") long id) {
+        userService.delete(id);
+    }
+
+
+    @GetMapping("/{id}/update")
+    @PreAuthorize(IS_AUTHENTICATED)
+    public ModelAndView updateUser(ModelAndView modelAndView, @ModelAttribute(name = "user") UserServiceModel userServiceModel, @PathVariable("id") long id) {
+        userServiceModel = userService.findById(userServiceModel.getId());
+
+        modelAndView.addObject("user", userServiceModel);
+        return view("edit_user");
+    }
+
+    @RequestMapping("/update")
+    @PreAuthorize(IS_AUTHENTICATED)
+    public ModelAndView putUser(@ModelAttribute(name = "user") UserServiceModel userServiceModel) {
+        userService.update(userServiceModel);
+
+        return redirect("/users");
     }
 }

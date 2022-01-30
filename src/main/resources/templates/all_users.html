@@ -37,7 +37,9 @@
                         <td th:text="*{username}"></td>
                         <td th:text="*{authorities}"></td>
                         <td>
-                            <button class="roundButton editButton">Редактиране</button>
+                            <a th:href="@{'/users/' + ${user.id} + '/update'}">
+                                <button class="roundButton editButton">Редактиране</button>
+                            </a>
                             <a th:href="@{'/users/' + ${user.id} + '/delete'}">
                                 <button class="roundButton deleteButton">Изтрий</button>
                             </a>

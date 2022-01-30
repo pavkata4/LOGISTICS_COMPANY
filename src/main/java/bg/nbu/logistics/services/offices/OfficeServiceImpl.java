@@ -1,12 +1,12 @@
 package bg.nbu.logistics.services.offices;
 
-import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_COURIER;
-import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_EMPLOYEE;
+import static bg.nbu.logistics.commons.constants.RoleConstants.*;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
 import java.util.*;
 
+import bg.nbu.logistics.domain.entities.Role;
 import bg.nbu.logistics.services.users.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +61,46 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
-    public void createOffice(Office office) {
-        officeRepository.saveAndFlush(office);
+    public void addCourier(long officeId, UserServiceModel userServiceModel) {
+        if (isUserAnEmployee(userServiceModel)) {
+            return;
+        }
+
+        Optional<Office> office = officeRepository.findById(officeId);
+        if (!office.isPresent()) {
+            log.error(OFFICE_NOT_FOUND_ERROR_TEMPLATE, officeId, userServiceModel.getUsername());
+            return;
+        }
+
+        userService.changeRoleById(userServiceModel.getId(), ROLE_COURIER);
+
+
+        Set<User> usersInOffice = office.get().getEmployees();
+        usersInOffice.add((modelMapper.map(userServiceModel, User.class)));
+        office.get().setEmployees(usersInOffice);
+        officeRepository.saveAndFlush(office.get());
+    }
+
+    @Override
+    public OfficeServiceModel createOffice(OfficeServiceModel officeServiceModel) {
+
+        final Office office = modelMapper.map(officeServiceModel, Office.class);
+        office.setId(office.getId());
+        office.setAddress(office.getAddress());
+        office.setEmployees(office.getEmployees());
+
+        return modelMapper.map(officeRepository.saveAndFlush(office), OfficeServiceModel.class);
+    }
+
+    @Override
+    public OfficeServiceModel updateOffice(OfficeServiceModel officeServiceModel) {
+        final Office office = modelMapper.map(officeServiceModel, Office.class);
+        office.setId(office.getId());
+        office.setAddress(office.getAddress());
+        office.setEmployees(office.getEmployees());
+
+        return officeRepository.findById(officeServiceModel.getId())
+                .map(updateOffice -> modelMapper.map(officeRepository.saveAndFlush(office), OfficeServiceModel.class)).orElseThrow();
     }
 
     @Override

@@ -19,6 +19,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -73,7 +74,8 @@ class OfficeControllerTest {
                         .register(new UserServiceModel(USERNAME, PASSWORD, singleton(new RoleServiceModel(EMPLOYEE)))),
                 User.class);
 
-        officeService.createOffice(new Office(ADDRESS, singleton(user)));
+//        officeService.createOffice(new Office(ADDRESS, singleton(user)));
+        officeService.createOffice(modelMapper.map(new Office(ADDRESS, singleton(user)), OfficeServiceModel.class));
     }
 
     @Test

@@ -66,6 +66,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserServiceModel update(UserServiceModel userServiceModel) {
+//        final User user = modelMapper.map(userServiceModel, User.class);
+//        user.setPassword(passwordEncoder.encode(userServiceModel.getPassword()));
+//        user.setAuthorities(modelMapper.map(userServiceModel.getAuthorities(), new HashSet<Role>().getClass()));
+        User user = userRepository.findById(userServiceModel.getId()).orElseThrow();
+        user.setUsername(userServiceModel.getUsername());
+
+        return userRepository.findById(userServiceModel.getId())
+                .map(updateOffice -> modelMapper.map(userRepository.saveAndFlush(user), UserServiceModel.class)).orElseThrow();
+    }
+
+    @Override
     public List<UserServiceModel> findAllUsers() {
         List<User> list = new ArrayList<>();
         for (User user : userRepository.findAll()) {
@@ -128,9 +140,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changeRoleById(long id, String authority) {
-        final User user = userRepository.findById(id).orElseThrow();
-        final Set<Role> roles = new HashSet<>();
-        roles.add(modelMapper.map(roleService.findByAuthority(ROLE_EMPLOYEE), Role.class));
+        User user = userRepository.findById(id).orElseThrow();
+        Set<Role> roles = new HashSet<>();
+        roles.add(modelMapper.map(roleService.findByAuthority(authority), Role.class));
         user.setAuthorities(roles);
         userRepository.saveAndFlush(user);
     }
