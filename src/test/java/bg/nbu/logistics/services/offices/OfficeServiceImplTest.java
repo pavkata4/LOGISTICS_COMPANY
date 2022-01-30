@@ -34,7 +34,6 @@ import bg.nbu.logistics.domain.models.service.RoleServiceModel;
 import bg.nbu.logistics.domain.models.service.UserServiceModel;
 import bg.nbu.logistics.repositories.OfficeRepository;
 import bg.nbu.logistics.services.users.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @ExtendWith(MockitoExtension.class)
 class OfficeServiceImplTest {

@@ -56,6 +56,9 @@
                             <a th:href="@{'/offices/' + ${office.id} + '/delete'}">
                                 <button class="roundButton deleteButton">Изтрий</button>
                             </a>
+                            <a th:href="@{'/offices/' + ${office.id} + '/remove_employee-courier'}">
+                                <button class="roundButton viewButton roundFormWithBlackText borderButton">Премахни служител/куриер</button>
+                            </a>
                         </td>
                     </tr>
                 </th:block>

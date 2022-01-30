@@ -23,17 +23,17 @@
             <form th:action="@{/offices/update}" th:object="${office}" th:method="post">
                 <div>
                     <input class="roundButton roundFormWithBlackText" type="text"
-                           name="id" id="id" placeholder="ID" th:field="${office.id}" th:value="*{id}" readonly
+                           name="id" id="id" placeholder="ID" th:field="${office.id}" th:value="*{id}" readonly="readonly"
                            required />
                 </div>
                 <div>
                     <input class="roundButton roundFormWithBlackText" type="text"
-                           name="address" id="address" placeholder="Адрес" th:field="*{address}" th:value="*{address}"
+                            th:field="*{address}" value="*{address}"
                            required />
                 </div>
                 <div>
                     <input class="roundButton roundFormWithBlackText" type="text"
-                           name="employees" id="employees" placeholder="Служители" th:field="${office.employees}" th:value="*{employees}" readonly
+                           name="employees" id="employees" placeholder="Служители" th:field="${office.employees}" value="*{employees}" readonly="readonly"
                            required />
                 </div>
                 <div>

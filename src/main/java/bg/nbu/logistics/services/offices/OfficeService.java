@@ -8,9 +8,8 @@ import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
 import bg.nbu.logistics.domain.models.service.UserServiceModel;
 
 public interface OfficeService {
-    void addEmployee(long officeId, UserServiceModel userServiceModel);
 
-    void addCourier(long officeId, UserServiceModel userServiceModel);
+    void operationsWithUsers(long officeId, UserServiceModel userServiceModel, String authority);
 
     OfficeServiceModel createOffice(OfficeServiceModel officeServiceModel);
 

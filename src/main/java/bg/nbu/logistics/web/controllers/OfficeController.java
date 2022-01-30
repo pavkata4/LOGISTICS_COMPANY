@@ -85,41 +85,32 @@ public class OfficeController extends BaseController {
     @PreAuthorize(IS_AUTHENTICATED)
     public ModelAndView addEmployee(ModelAndView modelAndView, @ModelAttribute(name = "user") UserServiceModel userServiceModel, @PathVariable("id") long id) {
         modelAndView.addObject("user", userServiceModel);
-        modelAndView.addObject("id", id);
         return view("add_employee");
-    }
-
-    @PostMapping("/{id}/staffing/employee")
-    @PreAuthorize(IS_AUTHENTICATED)
-    public ModelAndView postEmployee(ModelAndView modelAndView, @PathVariable(name = "id") long id,
-            @ModelAttribute(name = "user") UserServiceModel userServiceModel) {
-
-        final UserServiceModel userServiceModelByUsername = userService.findByUsername(userServiceModel.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException(UNABLE_TO_FIND_USER_BY_NAME_MESSAGE));
-
-        officeService.addEmployee(id, userServiceModelByUsername);
-
-        modelAndView.setViewName("redirect:" + "/offices");
-        return modelAndView;
     }
 
     @GetMapping("/{id}/add-courier")
     @PreAuthorize(IS_AUTHENTICATED)
     public ModelAndView addCourier(ModelAndView modelAndView, @ModelAttribute(name = "user") UserServiceModel userServiceModel, @PathVariable("id") long id) {
         modelAndView.addObject("user", userServiceModel);
-        modelAndView.addObject("id", id);
         return view("add_courier");
     }
 
-    @PostMapping("/{id}/staffing/courier")
+    @GetMapping("/{id}/remove_employee-courier")
     @PreAuthorize(IS_AUTHENTICATED)
-    public ModelAndView postCourier(ModelAndView modelAndView, @PathVariable(name = "id") long id,
-                                     @ModelAttribute(name = "user") UserServiceModel userServiceModel) {
+    public ModelAndView operationsWithUsers(ModelAndView modelAndView, @ModelAttribute(name = "user") UserServiceModel userServiceModel, @PathVariable("id") long id) {
+        modelAndView.addObject("user", userServiceModel);
+        return view("remove_employee-courier");
+    }
+
+    @PostMapping("/{id}/staffing/{authority}")
+    @PreAuthorize(IS_AUTHENTICATED)
+    public ModelAndView operateWithEmployeeOrCourier(ModelAndView modelAndView, @PathVariable(name = "id") long id,
+                                    @ModelAttribute(name = "user") UserServiceModel userServiceModel, @PathVariable(name = "authority") String authority) {
 
         final UserServiceModel userServiceModelByUsername = userService.findByUsername(userServiceModel.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException(UNABLE_TO_FIND_USER_BY_NAME_MESSAGE));
 
-        officeService.addCourier(id, userServiceModelByUsername);
+        officeService.operationsWithUsers(id, userServiceModelByUsername, authority);
 
         modelAndView.setViewName("redirect:" + "/offices");
         return modelAndView;

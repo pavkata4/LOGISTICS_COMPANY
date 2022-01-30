@@ -17,6 +17,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import bg.nbu.logistics.domain.entities.User;
 import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,10 +109,19 @@ public class UserController extends BaseController {
     }
 
 
+//    @GetMapping("/{id}/update")
+//    @PreAuthorize(IS_AUTHENTICATED)
+//    public ModelAndView updateUser(ModelAndView modelAndView, @ModelAttribute(name = "user") UserServiceModel userServiceModel, @PathVariable("id") long id) {
+//        userServiceModel = userService.findById(userServiceModel.getId());
+//
+//        modelAndView.addObject("user", userServiceModel);
+//        return view("edit_user");
+//    }
+
     @GetMapping("/{id}/update")
     @PreAuthorize(IS_AUTHENTICATED)
-    public ModelAndView updateUser(ModelAndView modelAndView, @ModelAttribute(name = "user") UserServiceModel userServiceModel, @PathVariable("id") long id) {
-        userServiceModel = userService.findById(userServiceModel.getId());
+    public ModelAndView updateUser(ModelAndView modelAndView, @PathVariable("id") long id) {
+        UserServiceModel userServiceModel = userService.findById(id);
 
         modelAndView.addObject("user", userServiceModel);
         return view("edit_user");

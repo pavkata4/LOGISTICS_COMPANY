@@ -40,29 +40,10 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
-    public void addEmployee(long officeId, UserServiceModel userServiceModel) {
-        if (isUserAnEmployee(userServiceModel)) {
+    public void operationsWithUsers(long officeId, UserServiceModel userServiceModel, String authority) {
+        if ((authority.equals("employee") || authority.equals("courier")) && isUserAnEmployee(userServiceModel)) {
             return;
-        }
-
-        final Optional<Office> office = officeRepository.findById(officeId);
-        if (!office.isPresent()) {
-            log.error(OFFICE_NOT_FOUND_ERROR_TEMPLATE, officeId, userServiceModel.getUsername());
-                    return;
-        }
-
-        userService.changeRoleById(userServiceModel.getId(), ROLE_EMPLOYEE);
-
-
-        Set<User> usersInOffice = office.get().getEmployees();
-        usersInOffice.add((modelMapper.map(userServiceModel, User.class)));
-        office.get().setEmployees(usersInOffice);
-        officeRepository.saveAndFlush(office.get());
-    }
-
-    @Override
-    public void addCourier(long officeId, UserServiceModel userServiceModel) {
-        if (isUserAnEmployee(userServiceModel)) {
+        } else if (authority.equals("user") && !isUserAnEmployee(userServiceModel)) {
             return;
         }
 
@@ -72,11 +53,26 @@ public class OfficeServiceImpl implements OfficeService {
             return;
         }
 
-        userService.changeRoleById(userServiceModel.getId(), ROLE_COURIER);
+        if (authority.equals("employee")) {
+            userService.changeRoleById(userServiceModel.getId(), ROLE_EMPLOYEE);
+        } else if (authority.equals("courier")) {
+            userService.changeRoleById(userServiceModel.getId(), ROLE_COURIER);
+        } else {
+            userService.changeRoleById(userServiceModel.getId(), ROLE_USER);
+        }
 
 
         Set<User> usersInOffice = office.get().getEmployees();
-        usersInOffice.add((modelMapper.map(userServiceModel, User.class)));
+        if (!authority.equals("user")) {
+            usersInOffice.add((modelMapper.map(userServiceModel, User.class)));
+        } else {
+            for (User user : usersInOffice) {
+                if (user.getId() == userServiceModel.getId()) {
+                    usersInOffice.remove(user);
+                    break;
+                }
+            }
+        }
         office.get().setEmployees(usersInOffice);
         officeRepository.saveAndFlush(office.get());
     }

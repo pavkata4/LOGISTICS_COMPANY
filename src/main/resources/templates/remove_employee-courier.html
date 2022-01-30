@@ -16,16 +16,15 @@
 </head>
 <body>
 <div class="pageContent">
-    <th:block th:include="~{fragments/menu}"></th:block>
     <header><h1>Logistic Company</h1></header>
     <div class="container">
-        <div class="box-1">
-            <div class="box-headline"><h2>Редактиране на потребител</h2></div>
-            <form th:action="@{/users/update}" th:object="${user}" th:method="post">
+        <div class="box-1" th:object="${id}">
+            <div class="box-headline"><h2>Премахване на служител от офис</h2></div>
+            <form th:action="@{'/offices/' + ${id} + '/staffing/user'}" th:object="${user}" th:method="post">
                 <div>
-                    <input class="roundButton roundFormWithBlackText" type="text" name="id"
-                           id="shipment_id" placeholder="ID" th:field="*{id}"
-                           readonly required />
+                    <input class="roundButton roundFormWithBlackText" type="text"
+                           name="name" id="employee_name" placeholder="Напиши име.." th:field="${user.username}"
+                           required />
                 </div>
                 <div>
                     <button class="roundButton roundFormWithBlackText editButton" type="submit">Добавяне</button>

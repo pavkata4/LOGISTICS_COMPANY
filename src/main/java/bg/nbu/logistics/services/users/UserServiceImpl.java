@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
         user.setUsername(userServiceModel.getUsername());
 
         return userRepository.findById(userServiceModel.getId())
-                .map(updateOffice -> modelMapper.map(userRepository.saveAndFlush(user), UserServiceModel.class)).orElseThrow();
+                .map(updateUser -> modelMapper.map(userRepository.saveAndFlush(user), UserServiceModel.class)).orElseThrow();
     }
 
     @Override
