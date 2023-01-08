@@ -1,4 +1,4 @@
-package bg.nbu.logistics.domain.models.view;
+package com.example.logistics.domain.models.view;
 
 import java.util.Set;
 

@@ -1,13 +1,13 @@
-package bg.nbu.logistics.web.controllers;
+package com.example.logistics.web.controllers;
 
-import static bg.nbu.logistics.commons.constants.RoleConstants.EMPLOYEE;
-import static bg.nbu.logistics.commons.constants.paths.PathParamConstants.DELETE;
-import static bg.nbu.logistics.commons.constants.paths.ShipmentPathParamConstants.SHIPMENTS;
-import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.ALL_SHIPMENTS;
-import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.MY_SHIPMENTS;
-import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.RECEIVED_SHIPMENT_VIEW_MODELS;
-import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.SENT_SHIPMENT_VIEW_MODELS;
-import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.SHIPMENT_VIEW_MODELS;
+import static com.example.logistics.commons.constants.RoleConstants.EMPLOYEE;
+import static com.example.logistics.commons.constants.paths.PathParamConstants.DELETE;
+import static com.example.logistics.commons.constants.paths.ShipmentPathParamConstants.SHIPMENTS;
+import static com.example.logistics.commons.constants.views.ShipmentViewConstants.ALL_SHIPMENTS;
+import static com.example.logistics.commons.constants.views.ShipmentViewConstants.MY_SHIPMENTS;
+import static com.example.logistics.commons.constants.views.ShipmentViewConstants.RECEIVED_SHIPMENT_VIEW_MODELS;
+import static com.example.logistics.commons.constants.views.ShipmentViewConstants.SENT_SHIPMENT_VIEW_MODELS;
+import static com.example.logistics.commons.constants.views.ShipmentViewConstants.SHIPMENT_VIEW_MODELS;
 import static java.time.LocalDate.now;
 import static java.util.Collections.singleton;
 import static org.hamcrest.Matchers.allOf;
@@ -36,14 +36,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.util.UriBuilder;
 
-import bg.nbu.logistics.commons.constants.paths.ShipmentPathParamConstants;
-import bg.nbu.logistics.domain.entities.Shipment;
-import bg.nbu.logistics.domain.models.service.RoleServiceModel;
-import bg.nbu.logistics.domain.models.service.ShipmentServiceModel;
-import bg.nbu.logistics.domain.models.service.UserServiceModel;
-import bg.nbu.logistics.repositories.ShipmentRepository;
-import bg.nbu.logistics.services.shipments.ShipmentService;
-import bg.nbu.logistics.services.users.UserService;
+import com.example.logistics.commons.constants.paths.ShipmentPathParamConstants;
+import com.example.logistics.domain.entities.Shipment;
+import com.example.logistics.domain.models.service.RoleServiceModel;
+import com.example.logistics.domain.models.service.ShipmentServiceModel;
+import com.example.logistics.domain.models.service.UserServiceModel;
+import com.example.logistics.repositories.ShipmentRepository;
+import com.example.logistics.services.shipments.ShipmentService;
+import com.example.logistics.services.users.UserService;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest

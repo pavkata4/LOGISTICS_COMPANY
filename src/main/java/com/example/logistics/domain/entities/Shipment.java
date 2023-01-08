@@ -1,4 +1,4 @@
-package bg.nbu.logistics.domain.entities;
+package com.example.logistics.domain.entities;
 
 import static java.time.LocalDate.now;
 
@@ -42,4 +42,13 @@ public class Shipment {
     
     @Column(name = "send_date", nullable = false, updatable = false)
     private LocalDate sendDate = now();
+
+    public Shipment(String sender, String recipient, String address, int weight, double price, LocalDate sendDate) {
+        this.sender = sender;
+        this.recipient = recipient;
+        this.address = address;
+        this.weight = weight;
+        this.price = price;
+        this.sendDate = sendDate;
+    }
 }

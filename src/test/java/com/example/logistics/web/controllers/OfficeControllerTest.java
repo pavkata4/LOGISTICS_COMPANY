@@ -1,12 +1,12 @@
-package bg.nbu.logistics.web.controllers;
+package com.example.logistics.web.controllers;
 
-import static bg.nbu.logistics.commons.constants.RoleConstants.EMPLOYEE;
-import static bg.nbu.logistics.commons.constants.paths.OfficePathParamConstants.MANAGER;
-import static bg.nbu.logistics.commons.constants.paths.OfficePathParamConstants.OFFICES;
-import static bg.nbu.logistics.commons.constants.views.OfficeViewConstants.ADD_OFFICE;
-import static bg.nbu.logistics.commons.constants.views.OfficeViewConstants.ALL_OFFICES;
-import static bg.nbu.logistics.commons.constants.views.OfficeViewConstants.OFFICE_LIST_VIEW_MODELS;
-import static bg.nbu.logistics.commons.constants.views.OfficeViewConstants.OFFICE_VIEW_MODEL;
+import static com.example.logistics.commons.constants.RoleConstants.EMPLOYEE;
+import static com.example.logistics.commons.constants.paths.OfficePathParamConstants.MANAGER;
+import static com.example.logistics.commons.constants.paths.OfficePathParamConstants.OFFICES;
+import static com.example.logistics.commons.constants.views.OfficeViewConstants.ADD_OFFICE;
+import static com.example.logistics.commons.constants.views.OfficeViewConstants.ALL_OFFICES;
+import static com.example.logistics.commons.constants.views.OfficeViewConstants.OFFICE_LIST_VIEW_MODELS;
+import static com.example.logistics.commons.constants.views.OfficeViewConstants.OFFICE_VIEW_MODEL;
 import static java.util.Collections.singleton;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.equalTo;
@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
+import com.example.logistics.domain.models.service.OfficeServiceModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,12 +34,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.util.UriBuilder;
 
-import bg.nbu.logistics.domain.entities.Office;
-import bg.nbu.logistics.domain.entities.User;
-import bg.nbu.logistics.domain.models.service.RoleServiceModel;
-import bg.nbu.logistics.domain.models.service.UserServiceModel;
-import bg.nbu.logistics.services.offices.OfficeService;
-import bg.nbu.logistics.services.users.UserService;
+import com.example.logistics.domain.entities.Office;
+import com.example.logistics.domain.entities.User;
+import com.example.logistics.domain.models.service.RoleServiceModel;
+import com.example.logistics.domain.models.service.UserServiceModel;
+import com.example.logistics.services.offices.OfficeService;
+import com.example.logistics.services.users.UserService;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest

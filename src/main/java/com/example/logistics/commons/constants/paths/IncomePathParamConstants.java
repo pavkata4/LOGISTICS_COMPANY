@@ -1,4 +1,4 @@
-package bg.nbu.logistics.commons.constants.paths;
+package com.example.logistics.commons.constants.paths;
 
 import static lombok.AccessLevel.PRIVATE;
 

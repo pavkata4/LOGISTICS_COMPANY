@@ -1,4 +1,4 @@
-package bg.nbu.logistics.services.income;
+package com.example.logistics.services.income;
 
 import static java.util.stream.Collectors.summingDouble;
 
@@ -7,8 +7,8 @@ import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import bg.nbu.logistics.domain.models.service.ShipmentServiceModel;
-import bg.nbu.logistics.services.shipments.ShipmentService;
+import com.example.logistics.domain.models.service.ShipmentServiceModel;
+import com.example.logistics.services.shipments.ShipmentService;
 
 @Service
 public class IncomeServiceImpl implements IncomeService {

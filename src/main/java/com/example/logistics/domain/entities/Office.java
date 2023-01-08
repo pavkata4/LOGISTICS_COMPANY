@@ -1,4 +1,4 @@
-package bg.nbu.logistics.domain.entities;
+package com.example.logistics.domain.entities;
 
 import static javax.persistence.FetchType.EAGER;
 
@@ -31,4 +31,9 @@ public class Office  {
     @ManyToMany(targetEntity = User.class, fetch = EAGER)
     @JoinTable(name = "office_employees", joinColumns = @JoinColumn(name = "office_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private Set<User> employees = new HashSet<>();
+
+    public Office(String address, Set<User> employees) {
+        this.address = address;
+        this.employees = employees;
+    }
 }

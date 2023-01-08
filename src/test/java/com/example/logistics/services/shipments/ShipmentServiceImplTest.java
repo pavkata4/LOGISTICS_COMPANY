@@ -1,6 +1,6 @@
-package bg.nbu.logistics.services.shipments;
+package com.example.logistics.services.shipments;
 
-import static bg.nbu.logistics.services.shipments.ShipmentServiceImpl.PERSONAL_ADDRESS_PRICE_MULTIPLIER;
+import static com.example.logistics.services.shipments.ShipmentServiceImpl.PERSONAL_ADDRESS_PRICE_MULTIPLIER;
 import static java.time.LocalDate.now;
 import static java.util.Collections.singletonList;
 import static java.util.Optional.of;
@@ -22,12 +22,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import bg.nbu.logistics.commons.utils.Mapper;
-import bg.nbu.logistics.domain.entities.Shipment;
-import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
-import bg.nbu.logistics.domain.models.service.ShipmentServiceModel;
-import bg.nbu.logistics.repositories.ShipmentRepository;
-import bg.nbu.logistics.services.offices.OfficeService;
+import com.example.logistics.commons.utils.Mapper;
+import com.example.logistics.domain.entities.Shipment;
+import com.example.logistics.domain.models.service.OfficeServiceModel;
+import com.example.logistics.domain.models.service.ShipmentServiceModel;
+import com.example.logistics.repositories.ShipmentRepository;
+import com.example.logistics.services.offices.OfficeService;
 
 @ExtendWith(MockitoExtension.class)
 class ShipmentServiceImplTest {

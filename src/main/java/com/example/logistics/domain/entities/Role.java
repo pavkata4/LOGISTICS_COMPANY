@@ -1,4 +1,4 @@
-package bg.nbu.logistics.domain.entities;
+package com.example.logistics.domain.entities;
 
 import javax.persistence.*;
 
@@ -25,4 +25,8 @@ public class Role  implements GrantedAuthority {
 
     @Column(name = "authority", nullable = false)
     private String authority;
+
+    public Role(String authority){
+        this.authority = authority;
+    }
 }

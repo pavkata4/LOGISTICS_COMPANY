@@ -1,4 +1,4 @@
-package bg.nbu.logistics.commons.utils;
+package com.example.logistics.commons.utils;
 
 import static java.util.stream.Collectors.toUnmodifiableList;
 

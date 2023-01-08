@@ -1,9 +1,9 @@
-package bg.nbu.logistics.web.controllers;
+package com.example.logistics.web.controllers;
 
-import static bg.nbu.logistics.commons.constants.paths.IncomePathParamConstants.INCOME_PATH;
-import static bg.nbu.logistics.commons.constants.paths.IncomePathParamConstants.IN_RANGE;
-import static bg.nbu.logistics.commons.constants.views.IncomeViewConstants.INCOME;
-import static bg.nbu.logistics.commons.constants.views.IncomeViewConstants.INCOME_VIEW_MODEL;
+import static com.example.logistics.commons.constants.paths.IncomePathParamConstants.INCOME_PATH;
+import static com.example.logistics.commons.constants.paths.IncomePathParamConstants.IN_RANGE;
+import static com.example.logistics.commons.constants.views.IncomeViewConstants.INCOME;
+import static com.example.logistics.commons.constants.views.IncomeViewConstants.INCOME_VIEW_MODEL;
 import static java.time.LocalDate.now;
 import static java.time.format.DateTimeFormatter.ISO_DATE;
 import static org.springframework.boot.jdbc.EmbeddedDatabaseConnection.H2;
@@ -22,9 +22,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.util.UriBuilder;
 
-import bg.nbu.logistics.domain.entities.Shipment;
-import bg.nbu.logistics.services.income.IncomeService;
-import bg.nbu.logistics.services.shipments.ShipmentService;
+import com.example.logistics.domain.entities.Shipment;
+import com.example.logistics.services.income.IncomeService;
+import com.example.logistics.services.shipments.ShipmentService;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest

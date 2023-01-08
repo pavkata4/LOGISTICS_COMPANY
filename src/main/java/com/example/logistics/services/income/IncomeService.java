@@ -1,4 +1,4 @@
-package bg.nbu.logistics.services.income;
+package com.example.logistics.services.income;
 
 import java.time.LocalDate;
 

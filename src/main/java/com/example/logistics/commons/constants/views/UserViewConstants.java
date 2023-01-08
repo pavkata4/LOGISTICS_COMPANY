@@ -1,4 +1,4 @@
-package bg.nbu.logistics.commons.constants.views;
+package com.example.logistics.commons.constants.views;
 
 import static lombok.AccessLevel.PRIVATE;
 

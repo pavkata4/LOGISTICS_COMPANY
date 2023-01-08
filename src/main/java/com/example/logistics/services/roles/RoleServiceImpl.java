@@ -1,4 +1,4 @@
-package bg.nbu.logistics.services.roles;
+package com.example.logistics.services.roles;
 
 import static java.util.stream.Collectors.toUnmodifiableSet;
 
@@ -7,8 +7,8 @@ import java.util.Set;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import bg.nbu.logistics.domain.models.service.RoleServiceModel;
-import bg.nbu.logistics.repositories.RoleRepository;
+import com.example.logistics.domain.models.service.RoleServiceModel;
+import com.example.logistics.repositories.RoleRepository;
 
 @Service
 public class RoleServiceImpl implements RoleService {

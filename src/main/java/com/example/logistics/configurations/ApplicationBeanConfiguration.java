@@ -1,4 +1,4 @@
-package bg.nbu.logistics.configurations;
+package com.example.logistics.configurations;
 
 import static org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE;
 
@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import bg.nbu.logistics.commons.utils.Mapper;
+import com.example.logistics.commons.utils.Mapper;
 
 @Configuration
 public class ApplicationBeanConfiguration {

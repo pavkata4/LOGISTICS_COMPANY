@@ -1,9 +1,9 @@
-package bg.nbu.logistics.web.controllers;
+package com.example.logistics.web.controllers;
 
-import static bg.nbu.logistics.commons.constants.paths.PathParamConstants.HOME;
-import static bg.nbu.logistics.commons.constants.paths.PathParamConstants.HOME_PATH;
-import static bg.nbu.logistics.commons.constants.paths.PathParamConstants.INDEX;
-import static bg.nbu.logistics.commons.constants.paths.PathParamConstants.INDEX_PATH;
+import static com.example.logistics.commons.constants.paths.PathParamConstants.HOME;
+import static com.example.logistics.commons.constants.paths.PathParamConstants.HOME_PATH;
+import static com.example.logistics.commons.constants.paths.PathParamConstants.INDEX;
+import static com.example.logistics.commons.constants.paths.PathParamConstants.INDEX_PATH;
 import static org.springframework.boot.jdbc.EmbeddedDatabaseConnection.H2;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;

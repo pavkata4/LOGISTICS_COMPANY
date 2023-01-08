@@ -1,11 +1,11 @@
-package bg.nbu.logistics.repositories;
+package com.example.logistics.repositories;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import bg.nbu.logistics.domain.entities.Shipment;
+import com.example.logistics.domain.entities.Shipment;
 
 public interface ShipmentRepository extends JpaRepository<Shipment, Long> {
     List<Shipment> findAllByRecipient(String recipient);

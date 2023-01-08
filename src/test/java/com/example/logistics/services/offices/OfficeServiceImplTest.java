@@ -1,6 +1,6 @@
-package bg.nbu.logistics.services.offices;
+package com.example.logistics.services.offices;
 
-import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_USER;
+import static com.example.logistics.commons.constants.RoleConstants.ROLE_USER;
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
 import static java.util.Optional.empty;
@@ -20,14 +20,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
-import bg.nbu.logistics.commons.utils.Mapper;
-import bg.nbu.logistics.domain.entities.Office;
-import bg.nbu.logistics.domain.entities.User;
-import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
-import bg.nbu.logistics.domain.models.service.RoleServiceModel;
-import bg.nbu.logistics.domain.models.service.UserServiceModel;
-import bg.nbu.logistics.repositories.OfficeRepository;
-import bg.nbu.logistics.services.users.UserService;
+import com.example.logistics.commons.utils.Mapper;
+import com.example.logistics.domain.entities.Office;
+import com.example.logistics.domain.entities.User;
+import com.example.logistics.domain.models.service.OfficeServiceModel;
+import com.example.logistics.domain.models.service.RoleServiceModel;
+import com.example.logistics.domain.models.service.UserServiceModel;
+import com.example.logistics.repositories.OfficeRepository;
+import com.example.logistics.services.users.UserService;
 
 @ExtendWith(MockitoExtension.class)
 class OfficeServiceImplTest {

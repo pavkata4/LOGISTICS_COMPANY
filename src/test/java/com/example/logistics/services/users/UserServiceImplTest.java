@@ -1,9 +1,9 @@
-package bg.nbu.logistics.services.users;
+package com.example.logistics.services.users;
 
-import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_COURIER;
-import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_EMPLOYEE;
-import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_ROOT;
-import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_USER;
+import static com.example.logistics.commons.constants.RoleConstants.ROLE_COURIER;
+import static com.example.logistics.commons.constants.RoleConstants.ROLE_EMPLOYEE;
+import static com.example.logistics.commons.constants.RoleConstants.ROLE_ROOT;
+import static com.example.logistics.commons.constants.RoleConstants.ROLE_USER;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
@@ -33,12 +33,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import bg.nbu.logistics.domain.entities.Role;
-import bg.nbu.logistics.domain.entities.User;
-import bg.nbu.logistics.domain.models.service.RoleServiceModel;
-import bg.nbu.logistics.domain.models.service.UserServiceModel;
-import bg.nbu.logistics.repositories.UserRepository;
-import bg.nbu.logistics.services.roles.RoleService;
+import com.example.logistics.domain.entities.Role;
+import com.example.logistics.domain.entities.User;
+import com.example.logistics.domain.models.service.RoleServiceModel;
+import com.example.logistics.domain.models.service.UserServiceModel;
+import com.example.logistics.repositories.UserRepository;
+import com.example.logistics.services.roles.RoleService;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {

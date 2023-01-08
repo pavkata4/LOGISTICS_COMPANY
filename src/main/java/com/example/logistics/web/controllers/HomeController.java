@@ -1,11 +1,11 @@
-package bg.nbu.logistics.web.controllers;
+package com.example.logistics.web.controllers;
 
-import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_ANONYMOUS;
-import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
-import static bg.nbu.logistics.commons.constants.paths.PathParamConstants.HOME;
-import static bg.nbu.logistics.commons.constants.paths.PathParamConstants.HOME_PATH;
-import static bg.nbu.logistics.commons.constants.paths.PathParamConstants.INDEX;
-import static bg.nbu.logistics.commons.constants.paths.PathParamConstants.INDEX_PATH;
+import static com.example.logistics.commons.constants.AuthorizationConstants.IS_ANONYMOUS;
+import static com.example.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
+import static com.example.logistics.commons.constants.paths.PathParamConstants.HOME;
+import static com.example.logistics.commons.constants.paths.PathParamConstants.HOME_PATH;
+import static com.example.logistics.commons.constants.paths.PathParamConstants.INDEX;
+import static com.example.logistics.commons.constants.paths.PathParamConstants.INDEX_PATH;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

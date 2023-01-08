@@ -1,10 +1,10 @@
-package bg.nbu.logistics.services.shipments;
+package com.example.logistics.services.shipments;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import bg.nbu.logistics.domain.entities.Shipment;
-import bg.nbu.logistics.domain.models.service.ShipmentServiceModel;
+import com.example.logistics.domain.entities.Shipment;
+import com.example.logistics.domain.models.service.ShipmentServiceModel;
 
 public interface ShipmentService {
     List<ShipmentServiceModel> findAllShipments();

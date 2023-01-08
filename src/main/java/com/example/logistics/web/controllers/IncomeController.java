@@ -1,10 +1,10 @@
-package bg.nbu.logistics.web.controllers;
+package com.example.logistics.web.controllers;
 
-import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
-import static bg.nbu.logistics.commons.constants.paths.IncomePathParamConstants.INCOME_PATH;
-import static bg.nbu.logistics.commons.constants.paths.IncomePathParamConstants.IN_RANGE;
-import static bg.nbu.logistics.commons.constants.views.IncomeViewConstants.INCOME;
-import static bg.nbu.logistics.commons.constants.views.IncomeViewConstants.INCOME_VIEW_MODEL;
+import static com.example.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
+import static com.example.logistics.commons.constants.paths.IncomePathParamConstants.INCOME_PATH;
+import static com.example.logistics.commons.constants.paths.IncomePathParamConstants.IN_RANGE;
+import static com.example.logistics.commons.constants.views.IncomeViewConstants.INCOME;
+import static com.example.logistics.commons.constants.views.IncomeViewConstants.INCOME_VIEW_MODEL;
 import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
 
 import java.time.LocalDate;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import bg.nbu.logistics.services.income.IncomeService;
+import com.example.logistics.services.income.IncomeService;
 
 @Controller
 @RequestMapping(INCOME_PATH)

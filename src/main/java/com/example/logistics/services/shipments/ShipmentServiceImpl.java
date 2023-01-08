@@ -1,4 +1,4 @@
-package bg.nbu.logistics.services.shipments;
+package com.example.logistics.services.shipments;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -7,12 +7,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import bg.nbu.logistics.commons.utils.Mapper;
-import bg.nbu.logistics.domain.entities.Shipment;
-import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
-import bg.nbu.logistics.domain.models.service.ShipmentServiceModel;
-import bg.nbu.logistics.repositories.ShipmentRepository;
-import bg.nbu.logistics.services.offices.OfficeService;
+import com.example.logistics.commons.utils.Mapper;
+import com.example.logistics.domain.entities.Shipment;
+import com.example.logistics.domain.models.service.OfficeServiceModel;
+import com.example.logistics.domain.models.service.ShipmentServiceModel;
+import com.example.logistics.repositories.ShipmentRepository;
+import com.example.logistics.services.offices.OfficeService;
 
 @Service
 public class ShipmentServiceImpl implements ShipmentService {

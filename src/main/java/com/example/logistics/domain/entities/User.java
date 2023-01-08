@@ -1,4 +1,4 @@
-package bg.nbu.logistics.domain.entities;
+package com.example.logistics.domain.entities;
 
 import static java.util.Collections.emptySet;
 import static javax.persistence.FetchType.EAGER;

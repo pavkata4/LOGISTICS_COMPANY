@@ -1,13 +1,13 @@
-package bg.nbu.logistics.web.controllers;
+package com.example.logistics.web.controllers;
 
-import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
-import static bg.nbu.logistics.commons.constants.AuthorizationConstants.UNABLE_TO_FIND_USER_BY_NAME_MESSAGE;
-import static bg.nbu.logistics.commons.constants.paths.OfficePathParamConstants.MANAGER;
-import static bg.nbu.logistics.commons.constants.paths.OfficePathParamConstants.OFFICES;
-import static bg.nbu.logistics.commons.constants.views.OfficeViewConstants.ALL_OFFICES;
-import static bg.nbu.logistics.commons.constants.views.OfficeViewConstants.OFFICE_LIST_VIEW_MODELS;
+import static com.example.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
+import static com.example.logistics.commons.constants.AuthorizationConstants.UNABLE_TO_FIND_USER_BY_NAME_MESSAGE;
+import static com.example.logistics.commons.constants.paths.OfficePathParamConstants.MANAGER;
+import static com.example.logistics.commons.constants.paths.OfficePathParamConstants.OFFICES;
+import static com.example.logistics.commons.constants.views.OfficeViewConstants.ALL_OFFICES;
+import static com.example.logistics.commons.constants.views.OfficeViewConstants.OFFICE_LIST_VIEW_MODELS;
 
-import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
+import com.example.logistics.domain.models.service.OfficeServiceModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import bg.nbu.logistics.commons.utils.Mapper;
-import bg.nbu.logistics.domain.models.service.UserServiceModel;
-import bg.nbu.logistics.domain.models.view.OfficeViewModel;
-import bg.nbu.logistics.services.offices.OfficeService;
-import bg.nbu.logistics.services.users.UserService;
+import com.example.logistics.commons.utils.Mapper;
+import com.example.logistics.domain.models.service.UserServiceModel;
+import com.example.logistics.domain.models.view.OfficeViewModel;
+import com.example.logistics.services.offices.OfficeService;
+import com.example.logistics.services.users.UserService;
 
 
 @Controller

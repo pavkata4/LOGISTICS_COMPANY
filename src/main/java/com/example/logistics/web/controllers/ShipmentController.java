@@ -1,19 +1,20 @@
-package bg.nbu.logistics.web.controllers;
+package com.example.logistics.web.controllers;
 
-import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
-import static bg.nbu.logistics.commons.constants.paths.PathParamConstants.ID;
-import static bg.nbu.logistics.commons.constants.paths.ShipmentPathParamConstants.SHIPMENTS;
-import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.ALL_SHIPMENTS;
-import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.CREATE_SHIPMENT;
-import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.EDIT_SHIPMENT;
-import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.MY_SHIPMENTS;
-import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.RECEIVED_SHIPMENT_VIEW_MODELS;
-import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.SENT_SHIPMENT_VIEW_MODELS;
-import static bg.nbu.logistics.commons.constants.views.ShipmentViewConstants.SHIPMENT_VIEW_MODELS;
+import static com.example.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
+import static com.example.logistics.commons.constants.paths.PathParamConstants.ID;
+import static com.example.logistics.commons.constants.paths.ShipmentPathParamConstants.SHIPMENTS;
+import static com.example.logistics.commons.constants.views.ShipmentViewConstants.ALL_SHIPMENTS;
+import static com.example.logistics.commons.constants.views.ShipmentViewConstants.CREATE_SHIPMENT;
+import static com.example.logistics.commons.constants.views.ShipmentViewConstants.EDIT_SHIPMENT;
+import static com.example.logistics.commons.constants.views.ShipmentViewConstants.MY_SHIPMENTS;
+import static com.example.logistics.commons.constants.views.ShipmentViewConstants.RECEIVED_SHIPMENT_VIEW_MODELS;
+import static com.example.logistics.commons.constants.views.ShipmentViewConstants.SENT_SHIPMENT_VIEW_MODELS;
+import static com.example.logistics.commons.constants.views.ShipmentViewConstants.SHIPMENT_VIEW_MODELS;
 
 import java.security.Principal;
 import java.util.List;
 
+import com.example.logistics.domain.entities.Shipment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -24,12 +25,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import bg.nbu.logistics.commons.constants.paths.ShipmentPathParamConstants;
-import bg.nbu.logistics.commons.utils.Mapper;
-import bg.nbu.logistics.domain.entities.Shipment;
-import bg.nbu.logistics.domain.models.service.ShipmentServiceModel;
-import bg.nbu.logistics.domain.models.view.ShipmentViewModel;
-import bg.nbu.logistics.services.shipments.ShipmentService;
+import com.example.logistics.commons.constants.paths.ShipmentPathParamConstants;
+import com.example.logistics.commons.utils.Mapper;
+import com.example.logistics.domain.models.service.ShipmentServiceModel;
+import com.example.logistics.domain.models.view.ShipmentViewModel;
+import com.example.logistics.services.shipments.ShipmentService;
 
 @Controller()
 @RequestMapping(SHIPMENTS)

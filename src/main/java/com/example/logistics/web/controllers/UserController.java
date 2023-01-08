@@ -1,16 +1,16 @@
-package bg.nbu.logistics.web.controllers;
+package com.example.logistics.web.controllers;
 
-import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_ANONYMOUS;
-import static bg.nbu.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
-import static bg.nbu.logistics.commons.constants.paths.UserPathParamConstants.LOGIN_PATH;
-import static bg.nbu.logistics.commons.constants.paths.UserPathParamConstants.REGISTER_PATH;
-import static bg.nbu.logistics.commons.constants.paths.UserPathParamConstants.USERS;
-import static bg.nbu.logistics.commons.constants.views.UserViewConstants.ALL_USERS;
-import static bg.nbu.logistics.commons.constants.views.UserViewConstants.EMPLOYEE_LIST_VIEW_MODELS;
-import static bg.nbu.logistics.commons.constants.views.UserViewConstants.LOGIN;
-import static bg.nbu.logistics.commons.constants.views.UserViewConstants.REGISTRATION;
-import static bg.nbu.logistics.commons.constants.views.UserViewConstants.USER_LIST_VIEW_MODELS;
-import static bg.nbu.logistics.commons.constants.views.UserViewConstants.USER_REGISTER_BINDING_MODEL;
+import static com.example.logistics.commons.constants.AuthorizationConstants.IS_ANONYMOUS;
+import static com.example.logistics.commons.constants.AuthorizationConstants.IS_AUTHENTICATED;
+import static com.example.logistics.commons.constants.paths.UserPathParamConstants.LOGIN_PATH;
+import static com.example.logistics.commons.constants.paths.UserPathParamConstants.REGISTER_PATH;
+import static com.example.logistics.commons.constants.paths.UserPathParamConstants.USERS;
+import static com.example.logistics.commons.constants.views.UserViewConstants.ALL_USERS;
+import static com.example.logistics.commons.constants.views.UserViewConstants.EMPLOYEE_LIST_VIEW_MODELS;
+import static com.example.logistics.commons.constants.views.UserViewConstants.LOGIN;
+import static com.example.logistics.commons.constants.views.UserViewConstants.REGISTRATION;
+import static com.example.logistics.commons.constants.views.UserViewConstants.USER_LIST_VIEW_MODELS;
+import static com.example.logistics.commons.constants.views.UserViewConstants.USER_REGISTER_BINDING_MODEL;
 import static java.util.stream.Collectors.toUnmodifiableList;
 
 import java.util.List;
@@ -29,10 +29,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriBuilder;
 
-import bg.nbu.logistics.domain.models.binding.UserRegisterBindingModel;
-import bg.nbu.logistics.domain.models.service.UserServiceModel;
-import bg.nbu.logistics.domain.models.view.UserViewModel;
-import bg.nbu.logistics.services.users.UserService;
+import com.example.logistics.domain.models.binding.UserRegisterBindingModel;
+import com.example.logistics.domain.models.service.UserServiceModel;
+import com.example.logistics.domain.models.view.UserViewModel;
+import com.example.logistics.services.users.UserService;
 
 @Controller
 @RequestMapping(USERS)

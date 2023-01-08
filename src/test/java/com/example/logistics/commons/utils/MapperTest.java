@@ -1,4 +1,4 @@
-package bg.nbu.logistics.commons.utils;
+package com.example.logistics.commons.utils;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;

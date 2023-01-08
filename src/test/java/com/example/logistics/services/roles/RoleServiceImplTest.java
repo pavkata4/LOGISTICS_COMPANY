@@ -1,4 +1,4 @@
-package bg.nbu.logistics.services.roles;
+package com.example.logistics.services.roles;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
@@ -17,9 +17,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
-import bg.nbu.logistics.domain.entities.Role;
-import bg.nbu.logistics.domain.models.service.RoleServiceModel;
-import bg.nbu.logistics.repositories.RoleRepository;
+import com.example.logistics.domain.entities.Role;
+import com.example.logistics.domain.models.service.RoleServiceModel;
+import com.example.logistics.repositories.RoleRepository;
 
 @ExtendWith(MockitoExtension.class)
 class RoleServiceImplTest {

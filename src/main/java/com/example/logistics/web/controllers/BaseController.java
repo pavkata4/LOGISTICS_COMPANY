@@ -1,4 +1,4 @@
-package bg.nbu.logistics.web.controllers;
+package com.example.logistics.web.controllers;
 
 import org.springframework.web.servlet.ModelAndView;
 

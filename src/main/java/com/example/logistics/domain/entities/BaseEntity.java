@@ -1,4 +1,4 @@
-package bg.nbu.logistics.domain.entities;
+package com.example.logistics.domain.entities;
 
 import static javax.persistence.GenerationType.IDENTITY;
 

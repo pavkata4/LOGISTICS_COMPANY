@@ -1,4 +1,4 @@
-package bg.nbu.logistics.domain.models.service;
+package com.example.logistics.domain.models.service;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

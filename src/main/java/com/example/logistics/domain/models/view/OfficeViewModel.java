@@ -1,9 +1,9 @@
-package bg.nbu.logistics.domain.models.view;
+package com.example.logistics.domain.models.view;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import bg.nbu.logistics.domain.entities.User;
+import com.example.logistics.domain.entities.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

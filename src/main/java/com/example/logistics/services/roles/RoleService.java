@@ -1,8 +1,8 @@
-package bg.nbu.logistics.services.roles;
+package com.example.logistics.services.roles;
 
 import java.util.Set;
 
-import bg.nbu.logistics.domain.models.service.RoleServiceModel;
+import com.example.logistics.domain.models.service.RoleServiceModel;
 
 public interface RoleService {
     Set<RoleServiceModel> findAllRoles();

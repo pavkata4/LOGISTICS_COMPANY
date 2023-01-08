@@ -1,24 +1,23 @@
-package bg.nbu.logistics.services.offices;
+package com.example.logistics.services.offices;
 
-import static bg.nbu.logistics.commons.constants.RoleConstants.*;
+import static com.example.logistics.commons.constants.RoleConstants.*;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
 import java.util.*;
 
-import bg.nbu.logistics.domain.entities.Role;
-import bg.nbu.logistics.services.users.UserService;
+import com.example.logistics.services.users.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import bg.nbu.logistics.commons.utils.Mapper;
-import bg.nbu.logistics.domain.entities.Office;
-import bg.nbu.logistics.domain.entities.User;
-import bg.nbu.logistics.domain.models.service.OfficeServiceModel;
-import bg.nbu.logistics.domain.models.service.RoleServiceModel;
-import bg.nbu.logistics.domain.models.service.UserServiceModel;
-import bg.nbu.logistics.repositories.OfficeRepository;
+import com.example.logistics.commons.utils.Mapper;
+import com.example.logistics.domain.entities.Office;
+import com.example.logistics.domain.entities.User;
+import com.example.logistics.domain.models.service.OfficeServiceModel;
+import com.example.logistics.domain.models.service.RoleServiceModel;
+import com.example.logistics.domain.models.service.UserServiceModel;
+import com.example.logistics.repositories.OfficeRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Service

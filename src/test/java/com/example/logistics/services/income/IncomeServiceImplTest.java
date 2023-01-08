@@ -1,4 +1,4 @@
-package bg.nbu.logistics.services.income;
+package com.example.logistics.services.income;
 
 import static java.time.LocalDate.now;
 import static java.util.Collections.singletonList;
@@ -17,8 +17,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import bg.nbu.logistics.domain.models.service.ShipmentServiceModel;
-import bg.nbu.logistics.services.shipments.ShipmentService;
+import com.example.logistics.domain.models.service.ShipmentServiceModel;
+import com.example.logistics.services.shipments.ShipmentService;
 
 @ExtendWith(MockitoExtension.class)
 class IncomeServiceImplTest {
