@@ -1,5 +1,6 @@
 package bg.nbu.logistics.services.users;
 
+
 import static bg.nbu.logistics.commons.constants.AuthorizationConstants.UNABLE_TO_FIND_USER_BY_NAME_MESSAGE;
 import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_EMPLOYEE;
 import static bg.nbu.logistics.commons.constants.RoleConstants.ROLE_USER;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import bg.nbu.logistics.domain.entities.Role;
@@ -28,9 +30,11 @@ import bg.nbu.logistics.domain.models.service.UserServiceModel;
 import bg.nbu.logistics.repositories.UserRepository;
 import bg.nbu.logistics.services.roles.RoleService;
 
+import javax.persistence.Column;
+
 @Service
 public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
+    private final  userRepository userRepository;
     private final RoleService roleService;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;

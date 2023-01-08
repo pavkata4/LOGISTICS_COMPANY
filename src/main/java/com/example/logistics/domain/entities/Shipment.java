@@ -4,9 +4,7 @@ import static java.time.LocalDate.now;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +18,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "shipments")
-public class Shipment extends BaseEntity {
+public class Shipment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private long id;
+
     @Column(name = "sender", nullable = false)
     private String sender;
 

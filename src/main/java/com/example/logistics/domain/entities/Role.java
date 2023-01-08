@@ -1,8 +1,6 @@
 package bg.nbu.logistics.domain.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -17,7 +15,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "roles")
-public class Role extends BaseEntity implements GrantedAuthority {
+public class Role  implements GrantedAuthority {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    private long id;
     private static final long serialVersionUID = 7373030764827481736L;
 
     @Column(name = "authority", nullable = false)

@@ -18,7 +18,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "offices")
-public class Office extends BaseEntity {
+public class Office  {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    private long id;
+
     @Column(name = "address", unique = true, nullable = false)
     private String address;
 

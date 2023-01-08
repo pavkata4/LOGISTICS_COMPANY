@@ -5,13 +5,7 @@ import static javax.persistence.FetchType.EAGER;
 
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -24,8 +18,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Table(name = "users")
-public class User extends BaseEntity implements UserDetails {
+public class User  implements UserDetails {
     private static final long serialVersionUID = -6720418047768269050L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private long id;
 
     @Column(name = "username", unique = true, nullable = false)
     private String username;
