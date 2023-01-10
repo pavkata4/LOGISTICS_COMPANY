@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/css/tables.css">
     <link rel="stylesheet" href="/css/buttons.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
 </head>
 <body>
@@ -21,7 +22,7 @@
     <header><h1>Logistic Company</h1></header>
     <div class="container">
         <div class="box-1">
-            <div class="box-headline"><h2>Редактиране на пратка</h2></div>
+            <div class="box-headline"><h2>Редактиране на пратка<i class="bi bi-pencil-square"></i></h2></div>
             <form th:action="@{/shipments/edit-shipment}" th:object="${shipment}" th:method="put">
                 <div>
                     <input class="roundButton roundFormWithBlackText" type="text" name="id"
@@ -41,7 +42,7 @@
                            th:value="*{weight}" required />
                 </div>
                 <div>
-                    <button class="roundButton roundFormWithBlackText editButton" type="submit">Добавяне</button>
+                    <button class="roundButton roundFormWithBlackText editButton" type="submit">Добавяне<i class="bi bi-person-fill-add"></i></button>
                 </div>
             </form>
         </div>
